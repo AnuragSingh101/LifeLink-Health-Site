@@ -1,0 +1,37 @@
+-------------------------------------------------------------------------------------------------------------------
+
+#####################################
+##About LifeLink 5th sem project ->##
+#####################################
+-------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------
+Life link (LL) is a web-based platform designed to efficiently manage and store vital information about blood
+donations and inventory in blood banks. This system helps hospitals quickly arrange for blood when needed by
+providing real-time data on available blood types and quantities. LL records comprehensive details about the
+blood, including donor information and recipient history, ensuring traceability and accountability throughout the
+blood donation process.
+
+In addition to managing blood inventory, LL includes a dedicated section for organizing blood donation
+campaigns. This feature allows hospitals to efficiently plan and track donation events, capturing essential details
+about donors and their contributions. By centralizing this information, LL facilitates the smooth operation of
+blood banks and ensures that hospitals can access safe, tested blood in a timely manner. This system plays a
+crucial role in supporting healthcare providers, enhancing the reliability and responsiveness of blood transfusion
+services.
+-------------------------------------------------------------------------------------------------------------------
+
+
+-------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------
+##################################################
+#####Development details of LifeLink project##### 
+##################################################
+-------------------------------------------------------------------------------------------------------------------
+````````````````````
+``LifeLink-Backend``
+````````````````````
+
+====================================================================================================================
+
+`````````````````````
+``LifeLink-FrontEnd``
+`````````````````````
