@@ -22,12 +22,24 @@ const registerUser = async(req, res) => {
     console.error(error.message);
     res.status(500).json({ message: 'Server is facing some error, please try again later' });
   }
-   
+    
 }
 
 
-const loginUser = (req, res) => {
-    res.status(200).json({message : 'Login Page for user'});
+const loginUser = async (req, res) => {
+    // res.status(200).json({message : 'Login Page for user'});
+    const { email, password } = req.body;
+    try {
+        // Check if user exists
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(400).json({ msg: 'Invalid credentials' });
+        }
+        res.json({user: { id: user._id, userName: user.userName, role: user.role } });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
  }
 
 module.exports = {
