@@ -1,6 +1,6 @@
 const { model } = require("mongoose");
 const User = require("../models/user");
-
+const bcrypt = require('bcrypt')
 
 
 const registerUser = async(req, res) => {
@@ -13,8 +13,12 @@ const registerUser = async(req, res) => {
       return res.status(400).json({ msg: 'User already exists' });
     }
   
+    //hashing user password 
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
     // Creating a new user in the database by using the credentials from the form
-    const newUser = new User({ firstName, lastName, userName, email, password, role });
+    const newUser = new User({ firstName, lastName, userName, email, password:hashedPassword, role });
     await newUser.save();
   
     res.status(201).json({ msg: 'User created successfully' });
@@ -35,6 +39,13 @@ const loginUser = async (req, res) => {
         if (!user) {
             return res.status(400).json({ msg: 'Invalid credentials' });
         }
+
+        // matching hash password with the user password
+        const isMatch = await bcrypt.compare(password, user.password)
+        if (!isMatch) {
+            return res.status(400).json({ msg: 'Invalid credentials' });
+        }
+        
         res.json({user: { id: user._id, userName: user.userName, role: user.role } });
     } catch (err) {
         console.error(err.message);
