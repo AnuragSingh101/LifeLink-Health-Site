@@ -1,6 +1,8 @@
 const express = require('express')
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const router = require('./routes/authRoute');
 require('dotenv').config();
+router
 const app = express()
 
 const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/mydatabase';
@@ -12,6 +14,10 @@ mongoose.connect(mongoURI,)
   .catch(err => {
     console.error('MongoDB connection error:', err);
   });
+
+//auth routes 
+app.use('/api/auth',router)
+
 
 
 
