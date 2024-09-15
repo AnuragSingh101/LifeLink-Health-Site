@@ -4,6 +4,8 @@ const router = require('./routes/authRoute');
 require('dotenv').config();
 router
 const app = express()
+// Add this middleware to parse JSON bodies
+app.use(express.json());
 
 const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/mydatabase';
 
