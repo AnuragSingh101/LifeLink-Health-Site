@@ -1,6 +1,10 @@
 const { model } = require("mongoose");
 const User = require("../models/user");
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken');
+const user = require("../models/user");
+const { configDotenv } = require("dotenv");
+
 
 
 const registerUser = async(req, res) => {
@@ -21,7 +25,11 @@ const registerUser = async(req, res) => {
     const newUser = new User({ firstName, lastName, userName, email, password:hashedPassword, role });
     await newUser.save();
   
-    res.status(201).json({ msg: 'User created successfully' });
+
+    //generating jwt token for authentication
+    const token = jwt.sign({ id: newUser._id, role: newUser.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    res.status(201).json({ token, user: { id: newUser._id, username: newUser.username, role: newUser.role } });
+    
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ message: 'Server is facing some error, please try again later' });
@@ -45,8 +53,8 @@ const loginUser = async (req, res) => {
         if (!isMatch) {
             return res.status(400).json({ msg: 'Invalid credentials' });
         }
-        
-        res.json({user: { id: user._id, userName: user.userName, role: user.role } });
+        const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        res.json({ token, user: { id: user._id, username: user.username, role: user.role } });
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');

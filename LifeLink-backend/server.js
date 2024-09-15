@@ -1,8 +1,9 @@
 const express = require('express')
 const mongoose = require('mongoose');
 const router = require('./routes/authRoute');
+const { authMiddleware, adminMiddleware } = require('./middleware/authMiddleware');
 require('dotenv').config();
-router
+
 const app = express()
 // Add this middleware to parse JSON bodies
 app.use(express.json());
@@ -20,8 +21,15 @@ mongoose.connect(mongoURI,)
 //auth routes 
 app.use('/api/auth',router)
 
+// Protected Route: Only authenticated users can access
+app.get('/user', authMiddleware, (req, res) => {
+    res.send(`Hello, ${req.user.id}!`);
+  });
 
-
+// Admin-only route
+app.get('/admin', authMiddleware, adminMiddleware, (req, res) => {
+    res.send('Welcome Admin!');
+});
 
 const port = process.env.PORT || 5000;
 
