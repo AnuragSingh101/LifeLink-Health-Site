@@ -53,6 +53,10 @@ const loginUser = async (req, res) => {
         if (!isMatch) {
             return res.status(400).json({ msg: 'Invalid credentials' });
         }
+        console.log('userdata',{
+            firstName: user.firstName,
+            lastName: user.lastName
+        })
         const token = jwt.sign({ id: user._id, role: user.role, firstName: user.firstName, lastName: user.lastName }, process.env.JWT_SECRET, { expiresIn: '1h' });
         res.json({ token, user: { id: user._id, role: user.role,  firstName: user.firstName, lastName: user.lastName  } });
     } catch (err) {
@@ -65,3 +69,10 @@ module.exports = {
     registerUser,
     loginUser
 }
+
+
+
+
+
+
+// error to be solve -> register krte time hmko dekhana hai ki ye username phle se used hai 
