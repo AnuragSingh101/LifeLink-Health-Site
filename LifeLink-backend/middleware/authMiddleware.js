@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
+const mongoose = require('mongoose')
+const User = require("../models/user");
 
 //middleware to verify token
 const authMiddleware = (req, res, next) => {
@@ -10,9 +12,11 @@ const authMiddleware = (req, res, next) => {
     }
   
     try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      req.user = decoded;
-      next();
+        const tokenPart = token.startsWith('Bearer ') ? token.slice(8) : token;
+        const decoded = jwt.verify(tokenPart, process.env.JWT_SECRET);
+        console.log(decoded)
+        req.user = decoded;
+        next();
     } catch (err) {
       res.status(401).json({ msg: 'Invalid token' });
     }

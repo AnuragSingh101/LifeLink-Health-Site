@@ -1,7 +1,11 @@
-// Building a function for the users routes in the site 
-const getUserDashboard = (req, res) => {
-   const { firstName, lastName } = req.user;
-   res.json({message:`Welcom to user DashBoard ${firstName} ${lastName}`});
-}
+const mongoose = require('mongoose')
+const User = require("../models/user");
 
-module.exports = {getUserDashboard}
+
+// Controller function to handle user dashboard
+const getUserDashboard = (req, res) => {
+   const { firstName, lastName } = req.user; // Access firstName and lastName from the JWT
+   res.send(`Welcome to the user dashboard, ${firstName}!`);
+};
+
+module.exports = { getUserDashboard };
