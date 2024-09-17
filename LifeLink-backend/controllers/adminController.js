@@ -3,4 +3,10 @@ const getHospitalDashboard = (req, res) => {
     res.send('Welcome to the hospital dashboard!');
 };
 
-module.exports = { getHospitalDashboard };
+const getAdminInventory = (req, res) => {
+    res.send('Welcome to the hospital Inventory!');
+
+}
+
+
+module.exports = { getHospitalDashboard, getAdminInventory };

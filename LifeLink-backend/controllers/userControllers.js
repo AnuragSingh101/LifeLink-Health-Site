@@ -8,4 +8,10 @@ const getUserDashboard = (req, res) => {
    res.send(`Welcome to the user dashboard, ${firstName} ${lastName} !`);
 };
 
-module.exports = { getUserDashboard };
+const getUserInventory = (req, res) => {
+   res.send('Welcome to the user Inventory!');
+
+}
+
+
+module.exports = { getUserDashboard, getUserInventory };
