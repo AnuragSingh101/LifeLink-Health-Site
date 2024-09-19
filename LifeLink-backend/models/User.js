@@ -1,4 +1,7 @@
+// imported mongoose npm to build a user schema 
 const mongoose = require('mongoose')
+
+// user schema 
 const userSchema = mongoose.Schema({
     firstName : {
         type: String,
@@ -29,4 +32,6 @@ const userSchema = mongoose.Schema({
     }
 })
 
+
+// export user schema to use them for users the authentication 
 module.exports = mongoose.model('User', userSchema)

@@ -1,3 +1,5 @@
+
+// importent imports 
 const { model } = require("mongoose");
 const User = require("../models/user");
 const bcrypt = require('bcrypt')
@@ -37,7 +39,7 @@ const registerUser = async(req, res) => {
     
 }
 
-
+// function to login as a admin or a normal user 
 const loginUser = async (req, res) => {
     // res.status(200).json({message : 'Login Page for user'});
     const { email, password } = req.body;
@@ -57,6 +59,7 @@ const loginUser = async (req, res) => {
             firstName: user.firstName,
             lastName: user.lastName
         })
+        // generating a jwt for the authentication 
         const token = jwt.sign({ id: user._id, role: user.role, firstName: user.firstName, lastName: user.lastName }, process.env.JWT_SECRET, { expiresIn: '1h' });
         res.json({ token, user: { id: user._id, role: user.role,  firstName: user.firstName, lastName: user.lastName  } });
     } catch (err) {
@@ -65,6 +68,7 @@ const loginUser = async (req, res) => {
     }
  }
 
+// exported the registration and login funtion to use them for login and signUp 
 module.exports = {
     registerUser,
     loginUser

@@ -1,4 +1,4 @@
-// function to make a authenticated user routes 
+// middleware to check that a loged in user is a normal user or not 
 const userMiddleware = (req, res, next) => {
     
     if(req.user.role !== 'user'){
@@ -7,4 +7,6 @@ const userMiddleware = (req, res, next) => {
     next()
 }
 
+
+// exported this middleware to check the authentication 
 module.exports = {userMiddleware}

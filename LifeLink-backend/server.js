@@ -16,8 +16,12 @@ const app = express()
 // Add this middleware to parse JSON bodies
 app.use(express.json());
 
+
+// MongoDb connection key to connect mongoDB with backend  
 const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/mydatabase';
 
+
+// connnected mongoDB whith the backend 
 mongoose.connect(mongoURI,)
   .then(() => {
     console.log('MongoDB connected');
@@ -29,7 +33,6 @@ mongoose.connect(mongoURI,)
 //auth routes 
 app.use('/api/auth',router)
 
-//users routes for the site
 
 //admin routes for hospital only or only for admins
 app.use('/api/admin', adminRoute);
@@ -47,6 +50,10 @@ app.get('/admin', authMiddleware, adminMiddleware, (req, res) => {
     res.send('Welcome Admin!');
 });
 
+
+// running this server in local host 5000
 const port = process.env.PORT || 5000;
 
+
+// using app to run this server 
 app.listen(port, () => `Server running on port ${port} `);

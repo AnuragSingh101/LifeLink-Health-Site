@@ -1,5 +1,3 @@
-const jwt = require('jsonwebtoken')
-require('dotenv').config()
 
 //middleware to check that a user is admin or not 
 const adminMiddleware = (req, res, next) => {
