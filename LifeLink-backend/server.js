@@ -20,6 +20,8 @@ app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json());
 
+
+
 // MongoDb connection key to connect mongoDB with backend  
 const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/mydatabase';
 
