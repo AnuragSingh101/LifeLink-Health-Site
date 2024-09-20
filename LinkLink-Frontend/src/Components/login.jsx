@@ -1,9 +1,11 @@
 // src/components/Login.jsx
 import React, { useState } from 'react';
+import axios from 'axios';
+
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
-    username: '',
+    email: '',
     password: ''
   });
 
@@ -15,9 +17,18 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Login Credentials Submitted: ', credentials);
+    console.log('Form Data Submitted: ', credentials);
+    try {
+      const response = await axios.post('http://localhost:5000/api/auth/login', credentials);
+      console.log(response.data);
+      alert('Login successful');
+    } catch (error) {
+      console.error('Login failed', error);
+      alert('Invalid username or password');
+    }
   };
 
   return (
@@ -25,11 +36,11 @@ const Login = () => {
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Username:</label>
+          <label>Email:</label>
           <input
             type="text"
-            name="username"
-            value={credentials.username}
+            name="email"
+            value={credentials.email}
             onChange={handleChange}
             required
           />

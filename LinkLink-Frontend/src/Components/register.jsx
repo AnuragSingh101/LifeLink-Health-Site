@@ -1,11 +1,12 @@
 // src/components/Register.jsx
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const Register = () => {
   const [formData, setFormData] = useState({
-    firstname: '',
-    lastname: '',
-    username: '',
+    firstName: '',
+    lastName: '',
+    userName: '',
     email: '',
     password: '',
     role: ''
@@ -19,9 +20,17 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Form Data Submitted: ', formData);
+    try {
+      const response = await axios.post('http://localhost:5000/api/auth/register', formData);
+      console.log(response.data);
+      alert('Registration successful');
+      
+    } catch (error) {
+      console.error('There was an error registering the user!', error);
+    }
   };
 
   return (
@@ -32,8 +41,8 @@ const Register = () => {
           <label>First Name:</label>
           <input
             type="text"
-            name="firstname"
-            value={formData.firstname}
+            name="firstName"
+            value={formData.firstName}
             onChange={handleChange}
             required
           />
@@ -43,8 +52,8 @@ const Register = () => {
           <label>Last Name:</label>
           <input
             type="text"
-            name="lastname"
-            value={formData.lastname}
+            name="lastName"
+            value={formData.lastName}
             onChange={handleChange}
             required
           />
@@ -54,8 +63,8 @@ const Register = () => {
           <label>Username:</label>
           <input
             type="text"
-            name="username"
-            value={formData.username}
+            name="userName"
+            value={formData.userName}
             onChange={handleChange}
             required
           />
