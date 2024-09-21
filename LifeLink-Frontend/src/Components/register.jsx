@@ -1,8 +1,11 @@
 // src/components/Register.jsx
+// importent imports
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+
+// braking down all details in formData
 const Register = () => {
   const [formData, setFormData] = useState({
     firstName: '',
@@ -12,6 +15,8 @@ const Register = () => {
     password: '',
     role: ''
   });
+
+  // calling all useNavigate function to the navigate variavble 
   const navigate = useNavigate();
 
 
@@ -23,6 +28,7 @@ const Register = () => {
     });
   };
 
+  // function to handle submit button click event 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Form Data Submitted: ', formData);
@@ -30,6 +36,8 @@ const Register = () => {
       const response = await axios.post('http://localhost:5000/api/auth/register', formData);
       console.log(response.data);
       alert('Registration successful');
+
+      // directing user to login page after registeration is successfull
       navigate('/login');
 
       
@@ -38,6 +46,7 @@ const Register = () => {
     }
   };
 
+    // main registration page UI html 
   return (
     <div>
       <h2>Register</h2>

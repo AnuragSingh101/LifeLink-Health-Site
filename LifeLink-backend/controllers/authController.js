@@ -57,11 +57,20 @@ const loginUser = async (req, res) => {
         }
         console.log('userdata',{
             firstName: user.firstName,
-            lastName: user.lastName
+            lastName: user.lastName,
+            role: user.role
         })
         // generating a jwt for the authentication 
         const token = jwt.sign({ id: user._id, role: user.role, firstName: user.firstName, lastName: user.lastName }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.json({ token, user: { id: user._id, role: user.role,  firstName: user.firstName, lastName: user.lastName  } });
+        res.json({ 
+            token, 
+            user: { 
+              id: user._id, 
+              role: user.role, 
+              firstName: user.firstName, 
+              lastName: user.lastName 
+            }
+          });
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');

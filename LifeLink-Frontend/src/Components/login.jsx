@@ -27,11 +27,22 @@ const Login = () => {
     console.log('Form Data Submitted: ', credentials);
     try {
       const response = await axios.post('http://localhost:5000/api/auth/login', credentials);
-      const { token } = response.data;
+      const { token, user } = response.data; // Extract 'user' instead of 'role'
+      const { role } = user;
       localStorage.setItem('token', token);
+      localStorage.setItem('role', role);
+
+      if(role === 'admin'){
+        navigate('/admin-dashboard')
+      }
+      else{
+        navigate('/user-dashboard')
+      }
+      console.log('Token:', token);
+      console.log('Role:', role);
+
       console.log(response.data);
       alert('Login successful');
-      navigate('/inventory');
     } catch (error) {
       console.error('Login failed', error);
       alert('Invalid username or password');
