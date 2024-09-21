@@ -1,5 +1,6 @@
 // src/components/Login.jsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 
@@ -8,6 +9,9 @@ const Login = () => {
     email: '',
     password: ''
   });
+  const navigate = useNavigate();
+
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,8 +27,11 @@ const Login = () => {
     console.log('Form Data Submitted: ', credentials);
     try {
       const response = await axios.post('http://localhost:5000/api/auth/login', credentials);
+      const { token } = response.data;
+      localStorage.setItem('token', token);
       console.log(response.data);
       alert('Login successful');
+      navigate('/inventory');
     } catch (error) {
       console.error('Login failed', error);
       alert('Invalid username or password');

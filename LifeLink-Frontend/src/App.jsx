@@ -5,10 +5,10 @@ import Register from './Components/register';
 import Login from './Components/login';
 import NavBar from './Components/navBar';
 import HomePage from './Components/homePage';
-import campaingPage from './Components/campaingPage';
-import inventoryPage from './Components/inventoryPage';
-
-
+import Campaign from './Components/Campaign';
+import Inventory from './Components/Inventory';
+import About from './Components/About';
+import ProtectedRoute from './Components/ProtectedRoute';
 
 function App() {
   return (
@@ -20,8 +20,14 @@ function App() {
         </div>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/campaing" element={<campaingPage />} />
-          <Route path="/inventory" element={<inventoryPage />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/inventory" 
+            element={
+            <ProtectedRoute>
+              <Inventory />
+          </ProtectedRoute>
+        } />
+          <Route path="/campaign" element={<Campaign />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
         </Routes>

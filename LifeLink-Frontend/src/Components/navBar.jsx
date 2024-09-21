@@ -16,6 +16,15 @@ const NavBar = () => {
         <li><Link to="/inventory">Inventory</Link></li>
         <li><Link to="/campaign">Campaign</Link></li>
       </ul>
+      <div className="auth-buttons">
+        {/* Login and Signup buttons */}
+        <Link to="/login">
+          <button style={{ marginRight: '10px' }}>Login</button>
+        </Link>
+        <Link to="/register">
+          <button>Signup</button>
+        </Link>
+      </div>
     </nav>
   );
 };
