@@ -4,15 +4,22 @@ require('dotenv').config();
 const cors = require('cors')
 const bodyParser = require('body-parser');
 
-// modulel functions imports 
+//importes express function in app variable 
+const app = express()
+
+// auth modulel functions imports 
 const router = require('./routes/authRoute');
 const { authMiddleware } = require('./middleware/authMiddleware');
 const { adminMiddleware } = require('./middleware/adminMiddleware')
 const adminRoute = require('./routes/adminRoute')
 const userRoutes = require('./routes/userRoutes')
 
-//importes express function in app variable 
-const app = express()
+// blood module imports 
+app.use('/api/blood-inventory', require('./routes/bloodInventoryRoutes'));
+
+
+
+
 
 
 // Add this middleware to parse JSON bodies
