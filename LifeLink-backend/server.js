@@ -14,12 +14,11 @@ const { adminMiddleware } = require('./middleware/adminMiddleware')
 const adminRoute = require('./routes/adminRoute')
 const userRoutes = require('./routes/userRoutes')
 
-// blood module imports 
-app.use('/api/blood-inventory', require('./routes/bloodInventoryRoutes'));
+// Admin Routs for super user only 
+app.use('/api/admin', require('./routes/adminRoute'));
 
-
-
-
+// Users Routes for normal users only 
+app.use('/api/user', require('./routes/userRoutes'));
 
 
 // Add this middleware to parse JSON bodies
@@ -52,15 +51,6 @@ app.use('/api/admin', adminRoute);
 //user routes for the user-accessable areas 
 app.use('/api/user', userRoutes)
 
-// Protected Route: Only authenticated users can access
-app.get('/user', authMiddleware, (req, res) => {
-    res.send(`Hello, ${req.user.id}!`);
-  });
-
-// Admin-only route
-app.get('/admin', authMiddleware, adminMiddleware, (req, res) => {
-    res.send('Welcome Admin!');
-});
 
 
 // running this server in local host 5000

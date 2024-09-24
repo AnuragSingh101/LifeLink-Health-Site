@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 
+
 // Imported authantication middleware to identify loged in user 
 const { authMiddleware } = require('../middleware/authMiddleware');
 
@@ -12,10 +13,10 @@ const {adminMiddleware} = require('../middleware/adminMiddleware')
 const { getHospitalDashboard, getAdminInventory } = require('../controllers/adminController');
 
 // Route for the hospital dashboard, only accessible by admins
-router.get('/hospitalDashboard', authMiddleware, adminMiddleware, getHospitalDashboard);
+router.get('/Dashboard', authMiddleware, adminMiddleware, getHospitalDashboard);
 
 // Route for the inventory with admin features for the admin users only 
-router.get('/adminInventory', authMiddleware, adminMiddleware, getAdminInventory);
+router.get('/Inventory', authMiddleware, adminMiddleware, getAdminInventory);
 
 // exported this routes to use it in main server files 
 module.exports = router;
