@@ -5,7 +5,7 @@ const HomePage = () => {
   return (
     <div className="homepage">
       <section id="home">
-        <h2>Welcome to MyApp</h2>
+        <h2>Welcome to LifeLink</h2>
         <p>This is the home section where you introduce your application.</p>
       </section>
       

@@ -1,13 +1,13 @@
 // src/App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import NavBar from './Components/NavBar';
-import HomePage from './Components/HomePage';
+import NavBar from './Components/navBar';
+import HomePage from './Components/homePage';
 import About from './Components/About';
 import Campaign from './Components/Campaign';
 import Inventory from './Components/Inventory';
-import Register from './Components/Register';
-import Login from './Components/Login';
+import Register from './Components/register';
+import Login from './Components/login';
 import AdminProtectedRoute from './Components/AdminProtectedRoute';
 import UserProtectedRoute from './Components/UserProtectedRoute';
 import AdminDashboard from './Components/AdminDashboard';

@@ -18,8 +18,8 @@ const Register = () => {
 
   // calling all useNavigate function to the navigate variavble 
   const navigate = useNavigate();
-
-
+  
+  // function to handle changes in the form  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -33,6 +33,7 @@ const Register = () => {
     e.preventDefault();
     console.log('Form Data Submitted: ', formData);
     try {
+      // sending responce to the /api/auth/register backend to database
       const response = await axios.post('http://localhost:5000/api/auth/register', formData);
       console.log(response.data);
       alert('Registration successful');
@@ -49,7 +50,9 @@ const Register = () => {
     // main registration page UI html 
   return (
     <div>
+
       <h2>Register</h2>
+      {/* form to get user details  */}
       <form onSubmit={handleSubmit}>
         <div>
           <label>First Name:</label>

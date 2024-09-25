@@ -11,8 +11,6 @@ const Login = () => {
   });
   const navigate = useNavigate();
 
-  
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCredentials({
@@ -38,6 +36,7 @@ const Login = () => {
       else{
         navigate('/user-dashboard')
       }
+
       console.log('Token:', token);
       console.log('Role:', role);
 
@@ -53,28 +52,17 @@ const Login = () => {
     <div>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
+        
         <div>
           <label>Email:</label>
-          <input
-            type="text"
-            name="email"
-            value={credentials.email}
-            onChange={handleChange}
-            required
-          />
+          <input type="text" name="email" value={credentials.email} onChange={handleChange} required />
         </div>
 
         <div>
           <label>Password:</label>
-          <input
-            type="password"
-            name="password"
-            value={credentials.password}
-            onChange={handleChange}
-            required
-          />
+          <input type="password" name="password" value={credentials.password} onChange={handleChange} required />
         </div>
-
+        
         <button type="submit">Login</button>
       </form>
     </div>
