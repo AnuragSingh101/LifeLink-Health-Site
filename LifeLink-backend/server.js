@@ -14,23 +14,14 @@ const { adminMiddleware } = require('./middleware/adminMiddleware')
 const adminRoute = require('./routes/adminRoute')
 const userRoutes = require('./routes/userRoutes')
 
-// Admin Routs for super user only 
-app.use('/api/admin', require('./routes/adminRoute'));
-
-// Users Routes for normal users only 
-app.use('/api/user', require('./routes/userRoutes'));
-
-
 // Add this middleware to parse JSON bodies
 app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json());
 
 
-
 // MongoDb connection key to connect mongoDB with backend  
 const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/mydatabase';
-
 
 // connnected mongoDB whith the backend 
 mongoose.connect(mongoURI,)
@@ -41,9 +32,10 @@ mongoose.connect(mongoURI,)
     console.error('MongoDB connection error:', err);
   });
 
+// Site routes ->
+//
 //auth routes 
 app.use('/api/auth',router)
-
 
 //admin routes for hospital only or only for admins
 app.use('/api/admin', adminRoute);
@@ -51,11 +43,8 @@ app.use('/api/admin', adminRoute);
 //user routes for the user-accessable areas 
 app.use('/api/user', userRoutes)
 
-
-
 // running this server in local host 5000
 const port = process.env.PORT || 5000;
-
 
 // using app to run this server 
 app.listen(port, () => `Server running on port ${port} `);
