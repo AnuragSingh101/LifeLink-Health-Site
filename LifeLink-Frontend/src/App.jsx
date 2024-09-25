@@ -2,16 +2,16 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NavBar from './Components/navBar';
-import HomePage from './Components/homePage';
-import About from './Components/About';
-import Campaign from './Components/Campaign';
-import Inventory from './Components/Inventory';
-import Register from './Components/register';
-import Login from './Components/login';
-import AdminProtectedRoute from './Components/AdminProtectedRoute';
-import UserProtectedRoute from './Components/UserProtectedRoute';
-import AdminDashboard from './Components/AdminDashboard';
-import UserDashboard from './Components/UserDashboard';
+import HomePage from './Components/Pages/homePage';
+import About from './Components/Pages/About';
+import Campaign from './Components/Pages/Campaign';
+import Inventory from './Components/Pages/Inventory';
+import Register from './Components/Auth/register';
+import Login from './Components/Auth/login';
+import AdminProtectedRoute from './Components/ProtectedRoutes/AdminProtectedRoute';
+import UserProtectedRoute from './Components/ProtectedRoutes/UserProtectedRoute';
+import AdminDashboard from './Components/DashBoard/AdminDashboard';
+import UserDashboard from './Components/DashBoard/UserDashboard';
 
 function App() {
   return (
