@@ -19,6 +19,7 @@ function App() {
       <div className="App">
         <h1>LifeLink</h1>
         <NavBar />
+        
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<About />} />
