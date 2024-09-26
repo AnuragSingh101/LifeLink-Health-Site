@@ -1,4 +1,3 @@
-// src/components/NavBar.jsx
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -34,80 +33,63 @@ const NavBar = () => {
 
   // Profile Icon Component
   const ProfileIcon = () => (
-    <img src="src/icons/profile.png" alt="Profile" style={{ width: '20px', height: '20px' }} />
+    <img src="src/icons/profile.png" alt="Profile" className="w-5 h-5" />
   );
 
   return (
-    <nav className="navbar" style={styles.navbar}>
-      <ul className="nav-links" style={styles.navLinks}>
-        <li><Link to='/' style={styles.link}>Home</Link></li>
-        <li><Link to="/about" style={styles.link}>About</Link></li>
-        <li><Link to="/inventory" style={styles.link}>Inventory</Link></li>
-        <li><Link to="/campaign" style={styles.link}>Campaign</Link></li>
+    <nav className="bg-gray-100 px-6 py-4 shadow-md flex justify-between items-center">
+      {/* LifeLink Text Logo */}
+      <div className="text-2xl font-bold text-gray-800">
+        <Link to="/">LifeLink</Link>
+      </div>
+
+      {/* Navigation Links */}
+      <ul className="flex space-x-6 text-gray-700">
+        <li>
+          <Link to="/" className="hover:text-gray-900">Home</Link>
+        </li>
+        <li>
+          <Link to="/about" className="hover:text-gray-900">About</Link>
+        </li>
+        <li>
+          <Link to="/inventory" className="hover:text-gray-900">Inventory</Link>
+        </li>
+        <li>
+          <Link to="/campaign" className="hover:text-gray-900">Campaign</Link>
+        </li>
       </ul>
 
-      <div className="auth-buttons" style={styles.authButtons}>
+      {/* Authentication Buttons */}
+      <div className="space-x-4">
         {isLoggedIn ? (
           <>
-            <button style={styles.profileButton}>
+            <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold px-4 py-2 rounded">
               <ProfileIcon />
             </button>
-            <button onClick={handleLogout} style={styles.button}>Logout</button>
+            <button
+              onClick={handleLogout}
+              className="bg-gray-800 hover:bg-gray-700 text-white font-semibold px-4 py-2 rounded"
+            >
+              Logout
+            </button>
           </>
         ) : (
           <>
             <Link to="/login">
-              <button style={styles.button}>Login</button>
+              <button className="bg-gray-800 hover:bg-gray-700 text-white font-semibold px-4 py-2 rounded">
+                Login
+              </button>
             </Link>
             <Link to="/register">
-              <button style={styles.button}>Signup</button>
+              <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold px-4 py-2 rounded">
+                Signup
+              </button>
             </Link>
           </>
         )}
       </div>
     </nav>
   );
-};
-
-// Inline styles
-const styles = {
-  navbar: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: '10px 20px',
-    backgroundColor: '#4CAF50', // Green background
-    color: 'white',
-  },
-  navLinks: {
-    listStyle: 'none',
-    display: 'flex',
-    margin: 0,
-    padding: 0,
-  },
-  link: {
-    color: 'white',
-    textDecoration: 'none',
-    marginRight: '20px',
-  },
-  authButtons: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  button: {
-    marginLeft: '10px',
-    padding: '5px 10px',
-    backgroundColor: '#fff',
-    color: '#4CAF50',
-    border: 'none',
-    borderRadius: '5px',
-    cursor: 'pointer',
-  },
-  profileButton: {
-    background: 'none',
-    border: 'none',
-    cursor: 'pointer',
-  },
 };
 
 export default NavBar;

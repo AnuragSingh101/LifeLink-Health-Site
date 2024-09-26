@@ -1,11 +1,7 @@
-// src/components/Register.jsx
-// importent imports
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-
-// braking down all details in formData
 const Register = () => {
   const [formData, setFormData] = useState({
     firstName: '',
@@ -16,10 +12,8 @@ const Register = () => {
     role: ''
   });
 
-  // calling all useNavigate function to the navigate variavble 
   const navigate = useNavigate();
-  
-  // function to handle changes in the form  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -28,103 +22,108 @@ const Register = () => {
     });
   };
 
-  // function to handle submit button click event 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Form Data Submitted: ', formData);
     try {
-      // sending responce to the /api/auth/register backend to database
       const response = await axios.post('http://localhost:5000/api/auth/register', formData);
       console.log(response.data);
       alert('Registration successful');
-
-      // directing user to login page after registeration is successfull
       navigate('/login');
-
-      
     } catch (error) {
       console.error('There was an error registering the user!', error);
     }
   };
 
-    // main registration page UI html 
   return (
-    <div>
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <div className="bg-white shadow-md rounded-lg px-8 py-6 w-full max-w-lg">
+        <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">Register</h2>
 
-      <h2>Register</h2>
-      {/* form to get user details  */}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>First Name:</label>
-          <input
-            type="text"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-            required
-          />
-        </div>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="flex flex-col">
+            <label className="text-gray-700 mb-2">First Name:</label>
+            <input
+              type="text"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+              className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
+              required
+            />
+          </div>
 
-        <div>
-          <label>Last Name:</label>
-          <input
-            type="text"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <div className="flex flex-col">
+            <label className="text-gray-700 mb-2">Last Name:</label>
+            <input
+              type="text"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
+              required
+            />
+          </div>
 
-        <div>
-          <label>Username:</label>
-          <input
-            type="text"
-            name="userName"
-            value={formData.userName}
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <div className="flex flex-col">
+            <label className="text-gray-700 mb-2">Username:</label>
+            <input
+              type="text"
+              name="userName"
+              value={formData.userName}
+              onChange={handleChange}
+              className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
+              required
+            />
+          </div>
 
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <div className="flex flex-col">
+            <label className="text-gray-700 mb-2">Email:</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
+              required
+            />
+          </div>
 
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <div className="flex flex-col">
+            <label className="text-gray-700 mb-2">Password:</label>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
+              required
+            />
+          </div>
 
-        <div>
-          <label>Role:</label>
-          <select
-            name="role"
-            value={formData.role}
-            onChange={handleChange}
-            required
+          <div className="flex flex-col">
+            <label className="text-gray-700 mb-2">Role:</label>
+            <select
+              name="role"
+              value={formData.role}
+              onChange={handleChange}
+              className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
+              required
+            >
+              <option value="">Select Role</option>
+              <option value="admin">Admin</option>
+              <option value="user">User</option>
+            </select>
+          </div>
+
+          <button
+            type="submit"
+            className="bg-gray-800 text-white font-semibold px-4 py-2 rounded-md w-full hover:bg-gray-700 transition-colors"
           >
-            <option value="">Select Role</option>
-            <option value="admin">Admin</option>
-            <option value="user">User</option>
-          </select>
-        </div>
-
-        <button type="submit">Register</button>
-      </form>
+            Register
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

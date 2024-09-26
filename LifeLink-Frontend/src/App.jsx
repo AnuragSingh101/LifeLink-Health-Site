@@ -17,7 +17,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <h1>LifeLink</h1>
         <NavBar />
         
         <Routes>
