@@ -5,7 +5,7 @@ import NavBar from './Components/navBar';
 import HomePage from './Components/Pages/homePage';
 import About from './Components/Pages/About';
 import Campaign from './Components/Pages/Campaign';
-import Inventory from './Components/Inventory';
+import Inventory from './Components/Pages/Inventory';
 import Register from './Components/Auth/register';
 import Login from './Components/Auth/login';
 import AdminProtectedRoute from './Components/ProtectedRoutes/AdminProtectedRoute';

@@ -26,12 +26,6 @@ const NavBar = () => {
     };
   }, []);
 
-  // Function to handle login
-  const handleLogin = (token) => {
-    localStorage.setItem('token', token); // Store token
-    setIsLoggedIn(true); // Update state to logged in
-  };
-
   // Function to handle logout
   const handleLogout = () => {
     localStorage.removeItem('token'); // Clear token
@@ -40,39 +34,80 @@ const NavBar = () => {
 
   // Profile Icon Component
   const ProfileIcon = () => (
-    <img src="src\icons\profile.png" alt="Profile" style={{ width: '20px', height: '20px' }} />
+    <img src="src/icons/profile.png" alt="Profile" style={{ width: '20px', height: '20px' }} />
   );
 
   return (
-    <nav className="navbar">
-      <ul className="nav-links">
-        <li><Link to='/'>Home</Link></li>
-        <li><Link to="/about">About</Link></li>
-        <li><Link to="/inventory">Inventory</Link></li>
-        <li><Link to="/campaign">Campaign</Link></li>
+    <nav className="navbar" style={styles.navbar}>
+      <ul className="nav-links" style={styles.navLinks}>
+        <li><Link to='/' style={styles.link}>Home</Link></li>
+        <li><Link to="/about" style={styles.link}>About</Link></li>
+        <li><Link to="/inventory" style={styles.link}>Inventory</Link></li>
+        <li><Link to="/campaign" style={styles.link}>Campaign</Link></li>
       </ul>
 
-      <div className="auth-buttons">
+      <div className="auth-buttons" style={styles.authButtons}>
         {isLoggedIn ? (
           <>
-              <button style={{ marginRight: '10px' }}>
-                <ProfileIcon />
-              </button>
-            <button onClick={handleLogout}>Logout</button>
+            <button style={styles.profileButton}>
+              <ProfileIcon />
+            </button>
+            <button onClick={handleLogout} style={styles.button}>Logout</button>
           </>
         ) : (
           <>
             <Link to="/login">
-              <button style={{ marginRight: '10px' }}>Login</button>
+              <button style={styles.button}>Login</button>
             </Link>
             <Link to="/register">
-              <button>Signup</button>
+              <button style={styles.button}>Signup</button>
             </Link>
           </>
         )}
       </div>
     </nav>
   );
+};
+
+// Inline styles
+const styles = {
+  navbar: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '10px 20px',
+    backgroundColor: '#4CAF50', // Green background
+    color: 'white',
+  },
+  navLinks: {
+    listStyle: 'none',
+    display: 'flex',
+    margin: 0,
+    padding: 0,
+  },
+  link: {
+    color: 'white',
+    textDecoration: 'none',
+    marginRight: '20px',
+  },
+  authButtons: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  button: {
+    marginLeft: '10px',
+    padding: '5px 10px',
+    backgroundColor: '#fff',
+    color: '#4CAF50',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer',
+  },
+  profileButton: {
+    background: 'none',
+    border: 'none',
+    cursor: 'pointer',
+  },
 };
 
 export default NavBar;
