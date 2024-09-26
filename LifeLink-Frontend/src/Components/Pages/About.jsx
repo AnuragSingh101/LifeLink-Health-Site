@@ -3,68 +3,46 @@ import React from 'react';
 
 const About = () => {
   return (
-    <div className="about-container" style={styles.container}>
-      <h1 style={styles.heading}>About Life Link</h1>
-      <p style={styles.intro}>
-        Life Link (LL) is a web-based platform dedicated to optimizing the management and storage of vital
-        information regarding blood donations and inventory in blood banks.
+    <div className="bg-gray-50 min-h-screen flex flex-col justify-center items-center py-10">
+      <h1 className="text-4xl font-bold text-gray-800 mb-6">About Life Link</h1>
+      <p className="text-lg text-gray-700 text-center mb-8 max-w-2xl">
+        Life Link (LL) is an innovative web-based platform dedicated to revolutionizing the management and
+        storage of critical information related to blood donations and inventory in blood banks. Our
+        mission is to ensure that every hospital has immediate access to safe and tested blood whenever
+        needed, ultimately saving lives and improving patient care.
       </p>
 
-      <h2 style={styles.subheading}>Our Mission</h2>
-      <p style={styles.text}>
-        To enhance the efficiency of blood donation processes, ensuring that hospitals have quick access to
-        safe, tested blood whenever needed.
-      </p>
+      <div className="w-full max-w-4xl bg-white shadow-md rounded-lg p-6 mb-8">
+        <h2 className="text-2xl font-semibold text-gray-800 mt-4 mb-2">Our Mission</h2>
+        <p className="text-gray-600 mb-4">
+          To enhance the efficiency and reliability of blood donation processes, ensuring that hospitals can
+          quickly access the vital resources they need to provide lifesaving care.
+        </p>
 
-      <h2 style={styles.subheading}>Our Vision</h2>
-      <p style={styles.text}>
-        To create a world where every hospital has seamless access to blood supplies, ultimately improving
-        patient care and saving lives.
-      </p>
+        <h2 className="text-2xl font-semibold text-gray-800 mt-4 mb-2">Our Vision</h2>
+        <p className="text-gray-600 mb-4">
+          To create a world where every healthcare provider has seamless access to blood supplies, 
+          facilitating timely treatments and ultimately improving patient outcomes.
+        </p>
 
-      <h2 style={styles.subheading}>Our Values</h2>
-      <ul style={styles.list}>
-        <li>Integrity: We maintain the highest standards of honesty and transparency.</li>
-        <li>Accountability: We take responsibility for our actions and their outcomes.</li>
-        <li>Innovation: We continuously strive to improve and embrace new technologies.</li>
-        <li>Collaboration: We work together with hospitals and blood banks to achieve our goals.</li>
-      </ul>
+        <h2 className="text-2xl font-semibold text-gray-800 mt-4 mb-2">Our Core Values</h2>
+        <ul className="list-disc list-inside text-gray-600 mb-4">
+          <li><strong>Integrity:</strong> We uphold the highest standards of honesty and transparency in all our operations.</li>
+          <li><strong>Accountability:</strong> We take responsibility for our actions and their impacts on the community.</li>
+          <li><strong>Innovation:</strong> We embrace change and continually seek to improve our technology and processes.</li>
+          <li><strong>Collaboration:</strong> We partner with hospitals and blood banks to achieve our shared goals.</li>
+        </ul>
 
-      <h2 style={styles.subheading}>Why Choose Life Link?</h2>
-      <p style={styles.text}>
-        By centralizing and streamlining the blood donation process, LL plays a crucial role in supporting
-        healthcare providers, enhancing the reliability and responsiveness of blood transfusion services.
-      </p>
+        <h2 className="text-2xl font-semibold text-gray-800 mt-4 mb-2">Why Choose Life Link?</h2>
+        <p className="text-gray-600 mb-4">
+          By centralizing and streamlining the blood donation process, Life Link plays a crucial role in 
+          empowering healthcare providers. Our platform enhances the reliability and responsiveness of blood
+          transfusion services, ensuring that patients receive the timely care they need. Together, we can 
+          build a safer, healthier community.
+        </p>
+      </div>
     </div>
   );
-};
-
-// Optional inline styles for better layout
-const styles = {
-  container: {
-    padding: '20px',
-    maxWidth: '800px',
-    margin: '0 auto',
-  },
-  heading: {
-    textAlign: 'center',
-    marginBottom: '20px',
-  },
-  subheading: {
-    marginTop: '20px',
-    marginBottom: '10px',
-  },
-  text: {
-    lineHeight: '1.6',
-  },
-  list: {
-    marginLeft: '20px',
-    lineHeight: '1.6',
-  },
-  intro: {
-    textAlign: 'justify',
-    marginBottom: '20px',
-  },
 };
 
 export default About;
