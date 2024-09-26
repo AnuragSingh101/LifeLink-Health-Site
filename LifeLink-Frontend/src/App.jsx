@@ -12,6 +12,7 @@ import AdminProtectedRoute from './Components/ProtectedRoutes/AdminProtectedRout
 import UserProtectedRoute from './Components/ProtectedRoutes/UserProtectedRoute';
 import AdminDashboard from './Components/DashBoard/AdminDashboard';
 import UserDashboard from './Components/DashBoard/UserDashboard';
+import ProtectedRoute from './Components/ProtectedRoutes/ProtectedRoute'
 
 function App() {
   return (
@@ -23,7 +24,11 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<About />} />
           <Route path="/campaign" element={<Campaign />} />
-          <Route path="/inventory" element={<Inventory />} />
+          <Route path="/inventory" element={
+            <ProtectedRoute>
+              <Inventory />
+            </ProtectedRoute>
+            } />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/admin-dashboard" element={
