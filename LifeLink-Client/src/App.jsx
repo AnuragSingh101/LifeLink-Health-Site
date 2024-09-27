@@ -15,8 +15,8 @@ function App() {
   return (
     <>
     {/* <NavBar/> */}
-    <DashboardNavBar/>
-    {/* <Register/> */}
+    {/* <DashboardNavBar/> */}
+    <Register/>
     {/* <HomePage/> */}
     {/* <About/> */}
     {/* <Campaign/> */}

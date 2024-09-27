@@ -13,6 +13,7 @@ const { authMiddleware } = require('./middleware/authMiddleware');
 const { adminMiddleware } = require('./middleware/adminMiddleware')
 const adminRoute = require('./routes/adminRoute')
 const userRoutes = require('./routes/userRoutes')
+const bloodInventoryRoutes = require('./routes/BloodRoutes');
 
 // Add this middleware to parse JSON bodies
 app.use(express.json());
@@ -42,6 +43,9 @@ app.use('/api/admin', adminRoute);
 
 //user routes for the user-accessable areas 
 app.use('/api/user', userRoutes)
+
+// blood inventory routes 
+app.use('/api/bloodInventory', bloodInventoryRoutes);
 
 // running this server in local host 5000
 const port = process.env.PORT || 5000;
