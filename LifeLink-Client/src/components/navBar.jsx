@@ -33,55 +33,52 @@ const NavBar = () => {
 
   // Profile Icon Component
   const ProfileIcon = () => (
-    <img src="src/icons/profile.png" alt="Profile" className="w-5 h-5" />
+    <img src="src/icons/profile.png" alt="Profile" />
   );
 
   return (
-    <nav className="bg-gray-100 px-6 py-4 shadow-md flex justify-between items-center">
+    <nav>
       {/* LifeLink Text Logo */}
-      <div className="text-2xl font-bold text-gray-800">
+      <div>
         <Link to="/">LifeLink</Link>
       </div>
 
       {/* Navigation Links */}
-      <ul className="flex space-x-6 text-gray-700">
+      <ul>
         <li>
-          <Link to="/" className="hover:text-gray-900">Home</Link>
+          <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/about" className="hover:text-gray-900">About</Link>
+          <Link to="/about">About</Link>
         </li>
         <li>
-          <Link to="/inventory" className="hover:text-gray-900">Inventory</Link>
+          <Link to="/inventory">Inventory</Link>
         </li>
         <li>
-          <Link to="/campaign" className="hover:text-gray-900">Campaign</Link>
+          <Link to="/campaign">Campaign</Link>
         </li>
       </ul>
 
       {/* Authentication Buttons */}
-      <div className="space-x-4">
+      <div>
         {isLoggedIn ? (
           <>
-            <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold px-4 py-2 rounded">
+            <button>
               <ProfileIcon />
             </button>
-            <button
-              onClick={handleLogout}
-              className="bg-gray-800 hover:bg-gray-700 text-white font-semibold px-4 py-2 rounded"
-            >
+            <button onClick={handleLogout}>
               Logout
             </button>
           </>
         ) : (
           <>
             <Link to="/login">
-              <button className="bg-gray-800 hover:bg-gray-700 text-white font-semibold px-4 py-2 rounded">
+              <button>
                 Login
               </button>
             </Link>
             <Link to="/register">
-              <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold px-4 py-2 rounded">
+              <button>
                 Signup
               </button>
             </Link>
