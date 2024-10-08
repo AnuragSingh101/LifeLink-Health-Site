@@ -17,7 +17,7 @@ exports.addBloodInventory = async (req, res) => {
 // Function to get all blood inventory
 exports.getAllBloodInventory = async (req, res) => {
   try {
-    const bloodInventory = await BloodInventory.find();
+    const bloodInventory = await BloodInventory.find().populate('donorId', 'name bloodType contactNumber');
     res.send(bloodInventory);
   } catch (error) {
     res.status(400).send({ error: 'Error fetching blood inventory', details: error.message });

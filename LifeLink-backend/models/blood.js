@@ -6,7 +6,9 @@ const bloodInventorySchema = new mongoose.Schema({
   quantity: { type: Number, required: true },
   expirationDate: { type: Date, required: true },
   receivedDate: { type: Date, default: Date.now },
-  status: { type: String, enum: ['Available', 'Reserved', 'Used', 'Expired'], default: 'Available' }
+  status: { type: String, enum: ['Available', 'Reserved', 'Used', 'Expired'], default: 'Available' },
+   // Reference to Donor model
+   donorId: { type: mongoose.Schema.Types.ObjectId, ref: 'Donor', required: true }
 });
 
 const BloodInventory = mongoose.model('BloodInventory', bloodInventorySchema);
