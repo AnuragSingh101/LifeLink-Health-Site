@@ -13,3 +13,13 @@ exports.addDonor = async(req, res) => {
         res.json({msg:"There is an error while processing your request"})
     }
 }
+
+
+exports.getAllDonor = async (req, res) => {
+    try {
+        const donors= await Donor.find()
+        res.status(201).send(donors)
+    } catch (error) {
+        res.status(401).json("There is an error while processing your request ")
+    }
+}

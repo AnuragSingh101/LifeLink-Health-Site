@@ -12,3 +12,4 @@ const bloodInventorySchema = new mongoose.Schema({
 const BloodInventory = mongoose.model('BloodInventory', bloodInventorySchema);
 
 module.exports = BloodInventory;
+
