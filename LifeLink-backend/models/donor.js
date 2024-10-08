@@ -1,21 +1,13 @@
-// schema to get donor details
+// models/Donor.js
 
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const donorSchema = new mongoose.Schema({
-    firstName: String,
-    lastName: String,
-    dateOfBirth : Date,
-    gender: {type:String,enum : ['Male', 'female', 'Other']},
-    bloodType:{type:String, enum: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']},
-    contact: {
-        phone: {type: Number, require: true},
-        email: {type: String, require: true},
-        address: {type: String, require: true}
-    },
-    lastDonationDate: Date,
-})
+  name: { type: String, required: true },
+  age: { type: Number, required: true },
+  bloodType: { type: String, enum: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'], required: true },
+  contactNumber: { type: String, required: true },
+  lastDonationDate: { type: Date, default: Date.now }
+});
 
-const Donor = mongoose.model('Donor', donorSchema)
-
-module.exports = Donor
+module.exports = mongoose.model('Donor', donorSchema);
