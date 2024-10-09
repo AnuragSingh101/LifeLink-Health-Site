@@ -1,4 +1,7 @@
+// models/Donor.js
+
 const mongoose = require('mongoose');
+
 const donorSchema = new mongoose.Schema({
   name: { type: String, required: true },
   age: { type: Number, required: true },
@@ -6,4 +9,7 @@ const donorSchema = new mongoose.Schema({
   contactNumber: { type: String, required: true },
   lastDonationDate: { type: Date, default: Date.now }
 });
+
 module.exports = mongoose.model('Donor', donorSchema);
+
+

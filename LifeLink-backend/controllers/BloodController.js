@@ -1,6 +1,8 @@
 // controllers/bloodInventoryController.js
+
 const BloodInventory = require('../models/blood');
 const mongoose = require('mongoose');
+
 // Function to add new blood inventory
 exports.addBloodInventory = async (req, res) => {
   try {
@@ -11,6 +13,7 @@ exports.addBloodInventory = async (req, res) => {
     res.status(400).send({ error: 'Error adding blood inventory', details: error.message });
   }
 };
+
 // Function to get all blood inventory
 exports.getAllBloodInventory = async (req, res) => {
   try {
@@ -20,6 +23,7 @@ exports.getAllBloodInventory = async (req, res) => {
     res.status(400).send({ error: 'Error fetching blood inventory', details: error.message });
   }
 };
+
 // Function to update existing blood inventory
 exports.updateBloodInventory = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
@@ -35,6 +39,7 @@ exports.updateBloodInventory = async (req, res) => {
     res.status(400).send({ error: 'Error updating blood inventory', details: error.message });
   }
 };
+
 // Function to delete blood inventory
 exports.deleteBloodInventory = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {

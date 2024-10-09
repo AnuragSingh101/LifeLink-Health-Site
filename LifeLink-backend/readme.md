@@ -30,8 +30,6 @@ Command to run while pulling this project
 1. cd LifeLink-Backend
 2. npm inti 
 3. npm install bcrypt bcryptjs cors dotenv express jsonwebtoken mongoose nodemon
-4. npm start
-
 
 
 

@@ -1,5 +1,6 @@
 // models/BloodInventory.js
 const mongoose = require('mongoose');
+
 const bloodInventorySchema = new mongoose.Schema({
   bloodType: { type: String, enum: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'], required: true },
   quantity: { type: Number, required: true },
@@ -9,6 +10,8 @@ const bloodInventorySchema = new mongoose.Schema({
    // Reference to Donor model
    donorId: { type: mongoose.Schema.Types.ObjectId, ref: 'Donor', required: true }
 });
+
 const BloodInventory = mongoose.model('BloodInventory', bloodInventorySchema);
+
 module.exports = BloodInventory;
 
