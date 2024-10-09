@@ -16,8 +16,8 @@ function App() {
     <>
     {/* <NavBar/> */}
     {/* <DashboardNavBar/> */}
-    <Register/>
-    {/* <HomePage/> */}
+    {/* <Register/> */}
+    <HomePage/>
     {/* <About/> */}
     {/* <Campaign/> */}
     {/* <Login/> */}
