@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css'
 import Login from './components/Auth/login'
 import Register from './components/Auth/register'
@@ -14,13 +15,14 @@ function App() {
 
   return (
     <>
-    {/* <NavBar/> */}
-    {/* <DashboardNavBar/> */}
-    {/* <Register/> */}
-    <HomePage/>
-    {/* <About/> */}
-    {/* <Campaign/> */}
-    {/* <Login/> */}
+    <Router>
+      <NavBar />
+      <Routes>
+        <Route path='/' element={<HomePage/>} />
+        <Route path='/login' element={<Login/>} />
+        <Route path='/register' element={<Register/>} />
+      </Routes>
+    </Router>
     </>
   )
 }
