@@ -8,7 +8,7 @@ const Login = () => {
     email: '',
     password: ''
   });
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,6 +28,8 @@ const Login = () => {
       const { role } = user;
       localStorage.setItem('token', token);
       localStorage.setItem('role', role);
+
+      navigate('/dashboard')
 
       // if(role === 'admin'){
       //   navigate('/admin-dashboard')

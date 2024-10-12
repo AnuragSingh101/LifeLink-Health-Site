@@ -8,6 +8,6 @@ const {addDonor, getAllDonor} = require('../controllers/DonorController')
 router.post('/addDonor', addDonor);
 
 
-router.get('/getAllDonor', getAllDonor);
+router.get('/', getAllDonor);
 
 module.exports = router

@@ -2,7 +2,7 @@
 // uncomment useNavigate and navigate before linking each page 
 import React, { useState } from 'react';
 import axios from 'axios';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 // braking down all details in formData
@@ -17,7 +17,7 @@ const Register = () => {
   });
 
   // calling all useNavigate function to the navigate variavble 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   
   // function to handle changes in the form  
   const handleChange = (e) => {
@@ -39,7 +39,7 @@ const Register = () => {
       alert('Registration successful');
 
       // directing user to login page after registeration is successfull
-      // navigate('/login');
+      navigate('/login');
 
       
     } catch (error) {

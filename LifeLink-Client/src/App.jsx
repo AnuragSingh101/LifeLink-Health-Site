@@ -8,7 +8,9 @@ import Campaign from './components/Pages/Campaign'
 import HomePage from './components/Pages/homePage'
 import NavBar from './components/navBar'
 import DashboardNavBar from './components/navBar/dashboardNavBar'
-
+import Dashboard from './components/DashBoard/AdminDashboard';
+import BloodInventoryList from './components/Pages/Inventory';
+import Donors from './components/Pages/Donors';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -21,6 +23,10 @@ function App() {
         <Route path='/' element={<HomePage/>} />
         <Route path='/login' element={<Login/>} />
         <Route path='/register' element={<Register/>} />
+        <Route path='/inventory' element={<BloodInventoryList/>} />
+        <Route path='/donors' element={<Donors/>} />
+
+
       </Routes>
     </Router>
     </>
