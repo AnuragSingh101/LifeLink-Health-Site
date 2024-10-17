@@ -15,33 +15,35 @@ const BloodInventoryList = () => {
       } catch (error) {
         setError('Error fetching blood inventory');
         setLoading(false);
-      } 
+      }
     };
 
     fetchBloodInventory();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
+  if (loading) return <p className="text-center text-gray-700">Loading...</p>;
+  if (error) return <p className="text-center text-red-600">{error}</p>;
 
   return (
-    <div>
-      <h1>Blood Inventory List</h1>
-      {bloodInventory.length === 0 ? (
-        <p>No blood inventory available.</p>
-      ) : (
-        <ul>
-          {bloodInventory.map((blood, index) => (
-            <li key={index}>
-              <strong>Blood Type:</strong> {blood.bloodType}<br />
-              <strong>Quantity:</strong> {blood.quantity}<br />
-              <strong>Status:</strong> {blood.status}<br />
-              <strong>Donor Name:</strong> {blood.donorId?.name || 'N/A'}<br />
-              <strong>Expiration Date:</strong> {new Date(blood.expirationDate).toLocaleDateString()}
-            </li>
-          ))}
-        </ul>
-      )}
+    <div className="min-h-screen bg-gradient-to-b from-white to-pink-100 flex items-center justify-center py-8">
+      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-3xl">
+        <h1 className="text-4xl font-bold text-center text-gray-800 mb-6">Blood Inventory List</h1>
+        {bloodInventory.length === 0 ? (
+          <p className="text-center text-gray-600">No blood inventory available.</p>
+        ) : (
+          <ul className="space-y-4">
+            {bloodInventory.map((blood, index) => (
+              <li key={index} className="border border-gray-300 p-4 rounded-lg shadow-sm">
+                <strong className="text-gray-800">Blood Type:</strong> {blood.bloodType}<br />
+                <strong className="text-gray-800">Quantity:</strong> {blood.quantity}<br />
+                <strong className="text-gray-800">Status:</strong> {blood.status}<br />
+                <strong className="text-gray-800">Donor Name:</strong> {blood.donorId?.name || 'N/A'}<br />
+                <strong className="text-gray-800">Expiration Date:</strong> {new Date(blood.expirationDate).toLocaleDateString()}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 };

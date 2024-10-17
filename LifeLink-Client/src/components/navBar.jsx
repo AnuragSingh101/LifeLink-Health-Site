@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
   // State to check if user is logged in
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   // Effect to check for token and listen for login/logout events
   useEffect(() => {
@@ -29,6 +30,7 @@ const NavBar = () => {
   const handleLogout = () => {
     localStorage.removeItem('token'); // Clear token
     setIsLoggedIn(false); // Update state to logged out
+    navigate('/'); // Redirect to the home page
   };
 
   // Profile Icon Component
@@ -37,52 +39,32 @@ const NavBar = () => {
   );
 
   return (
-    <nav>
-      {/* LifeLink Text Logo */}
-      <div>
-        <Link to="/">LifeLink</Link>
-      </div>
-
-      {/* Navigation Links */}
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/about">About</Link>
-        </li>
-        <li>
-          <Link to="/inventory">Inventory</Link>
-        </li>
-        <li>
-          <Link to="/campaign">Campaign</Link>
-        </li>
-      </ul>
-
-      {/* Authentication Buttons */}
-      <div>
+    <nav className="flex justify-between items-center p-6 bg-white shadow-md">
+      <div className="text-2xl font-bold">LOGO</div>
+      <ul className="flex space-x-8">
         {isLoggedIn ? (
           <>
-            <button>
-              <ProfileIcon />
-            </button>
-            <button onClick={handleLogout}>
-              Logout
-            </button>
+            <li><Link to="/about" className="text-black hover:text-gray-600">ABOUT</Link></li>
+            <li><Link to="/contact" className="text-black hover:text-gray-600">CONTACT US</Link></li>
+            <li><Link to="/inventory" className="text-black hover:text-gray-600">INVENTORY</Link></li>
+            <li><Link to="/donor" className="text-black hover:text-gray-600">DONOR</Link></li>
+            <li><Link to="/campaign" className="text-black hover:text-gray-600">CAMPAIGN</Link></li>
           </>
         ) : (
           <>
-            <Link to="/login">
-              <button>
-                Login
-              </button>
-            </Link>
-            <Link to="/register">
-              <button>
-                Signup
-              </button>
-            </Link>
+            <li><Link to="/login" className="text-black hover:text-gray-600">LOGIN</Link></li>
+            <li><Link to="/register" className="text-black hover:text-gray-600">REGISTER</Link></li>
           </>
+        )}
+      </ul>
+      <div className="text-xl">
+        {isLoggedIn ? (
+          <div>
+            <ProfileIcon />
+            <button onClick={handleLogout} className="text-black hover:text-gray-600 ml-4">LOGOUT</button>
+          </div>
+        ) : (
+          <i className="fas fa-user-circle text-purple-400"></i>
         )}
       </div>
     </nav>
