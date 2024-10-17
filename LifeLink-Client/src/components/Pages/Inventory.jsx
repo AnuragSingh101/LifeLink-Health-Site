@@ -25,25 +25,28 @@ const BloodInventoryList = () => {
   if (error) return <p className="text-center text-red-600">{error}</p>;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-pink-100 flex items-center justify-center py-8">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-3xl">
-        <h1 className="text-4xl font-bold text-center text-gray-800 mb-6">Blood Inventory List</h1>
-        {bloodInventory.length === 0 ? (
-          <p className="text-center text-gray-600">No blood inventory available.</p>
-        ) : (
-          <ul className="space-y-4">
-            {bloodInventory.map((blood, index) => (
-              <li key={index} className="border border-gray-300 p-4 rounded-lg shadow-sm">
-                <strong className="text-gray-800">Blood Type:</strong> {blood.bloodType}<br />
-                <strong className="text-gray-800">Quantity:</strong> {blood.quantity}<br />
-                <strong className="text-gray-800">Status:</strong> {blood.status}<br />
-                <strong className="text-gray-800">Donor Name:</strong> {blood.donorId?.name || 'N/A'}<br />
-                <strong className="text-gray-800">Expiration Date:</strong> {new Date(blood.expirationDate).toLocaleDateString()}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+    <div className="max-w-4xl mx-auto p-6 bg-gray-50 min-h-screen">
+      <h1 className="text-4xl font-bold text-red-600 mb-6 text-center">Blood Inventory List</h1>
+      {bloodInventory.length === 0 ? (
+        <p className="text-center text-gray-600">No blood inventory available.</p>
+      ) : (
+        <ul className="space-y-6">
+          {bloodInventory.map((blood, index) => (
+            <li key={index} className="p-6 border border-red-500 rounded-lg shadow-lg bg-white hover:shadow-xl transition-shadow">
+              <h2 className="text-xl font-semibold text-red-700">Blood Information</h2>
+              <div className="flex justify-between text-gray-800 mt-2">
+                <p><strong>Blood Type:</strong> {blood.bloodType}</p>
+                <p><strong>Quantity:</strong> {blood.quantity}G</p>
+                <p><strong>Status:</strong> {blood.status}</p>
+              </div>
+              <div className="flex justify-between text-gray-800 mt-2">
+                <p><strong>Donor Name:</strong> {blood.donorId?.name || 'N/A'}</p>
+                <p><strong>Expiration Date:</strong> {new Date(blood.expirationDate).toLocaleDateString()}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
