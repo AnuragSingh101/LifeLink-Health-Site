@@ -25,6 +25,8 @@ function App() {
         <Route path='/register' element={<Register/>} />
         <Route path='/inventory' element={<BloodInventoryList/>} />
         <Route path='/donors' element={<Donors/>} />
+        <Route path='/about' element={<About/>} />
+
 
 
       </Routes>

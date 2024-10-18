@@ -34,16 +34,17 @@ const NavBar = () => {
   };
 
   // Profile Icon Component
-  const ProfileIcon = () => (
-    <img src="src/icons/profile.png" alt="Profile" />
-  );
+  // const ProfileIcon = () => (
+  //   <img src="src/icons/profile.png" alt="Profile" />
+  // );
 
   return (
     <nav className="flex justify-between items-center p-6 bg-white shadow-md">
-      <div className="text-2xl font-bold">LOGO</div>
+      <div className="text-2xl font-bold">LifeLink</div>
       <ul className="flex space-x-8">
         {isLoggedIn ? (
           <>
+            <li><Link to="/" className="text-black hover:text-gray-600">Home</Link></li>
             <li><Link to="/about" className="text-black hover:text-gray-600">ABOUT</Link></li>
             <li><Link to="/contact" className="text-black hover:text-gray-600">CONTACT US</Link></li>
             <li><Link to="/inventory" className="text-black hover:text-gray-600">INVENTORY</Link></li>
@@ -52,15 +53,17 @@ const NavBar = () => {
           </>
         ) : (
           <>
+            <li><Link to="/" className="text-black hover:text-gray-600">Home</Link></li>
+            <li><Link to="/about" className="text-black hover:text-gray-600">ABOUT</Link></li>
+            <li><Link to="/contact" className="text-black hover:text-gray-600">CONTACT US</Link></li>
             <li><Link to="/login" className="text-black hover:text-gray-600">LOGIN</Link></li>
-            <li><Link to="/register" className="text-black hover:text-gray-600">REGISTER</Link></li>
           </>
         )}
       </ul>
       <div className="text-xl">
         {isLoggedIn ? (
           <div>
-            <ProfileIcon />
+            {/* <ProfileIcon /> */}
             <button onClick={handleLogout} className="text-black hover:text-gray-600 ml-4">LOGOUT</button>
           </div>
         ) : (
