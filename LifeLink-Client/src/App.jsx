@@ -11,6 +11,8 @@ import DashboardNavBar from './components/navBar/dashboardNavBar'
 import Dashboard from './components/DashBoard/AdminDashboard';
 import BloodInventoryList from './components/Pages/Inventory';
 import Donors from './components/Pages/Donors';
+import ContactUs from './components/Pages/ContactUs';
+
 
 function App() {
   const [count, setCount] = useState(0)
@@ -26,6 +28,8 @@ function App() {
         <Route path='/inventory' element={<BloodInventoryList/>} />
         <Route path='/donors' element={<Donors/>} />
         <Route path='/about' element={<About/>} />
+        <Route path='/contact' element={<ContactUs/>} />
+
 
 
 
