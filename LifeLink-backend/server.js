@@ -15,6 +15,7 @@ const adminRoute = require('./routes/adminRoute')
 const userRoutes = require('./routes/userRoutes')
 const bloodInventoryRoutes = require('./routes/BloodRoutes');
 const donorRoute = require('./routes/DonorRoute')
+const campignRoute = require('./routes/')
 
 // Add this middleware to parse JSON bodies
 app.use(express.json());
@@ -50,6 +51,10 @@ app.use('/api/bloodInventory', bloodInventoryRoutes);
 
 // blood donor routes 
 app.use('/api/donor', donorRoute);
+
+// campign Routes 
+app.use('/api/campign', campignRoute);
+
 
 
 // running this server in local host 5000
