@@ -14,7 +14,6 @@ exports.addDonor = async(req, res) => {
     }
 }
 
-
 exports.getAllDonor = async (req, res) => {
     try {
         const donors= await Donor.find()

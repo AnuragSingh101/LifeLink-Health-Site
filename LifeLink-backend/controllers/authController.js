@@ -10,7 +10,6 @@ const { configDotenv } = require("dotenv");
 
 
 const registerUser = async(req, res) => {
-//    res.status(200).json({message : 'Registration Page for user'});
    const {firstName, lastName, userName, email, password, role} = req.body
    try {
     // Check if user already exists
@@ -41,7 +40,6 @@ const registerUser = async(req, res) => {
 
 // function to login as a admin or a normal user 
 const loginUser = async (req, res) => {
-    // res.status(200).json({message : 'Login Page for user'});
     const { email, password } = req.body;
     try {
         // Check if user exists
@@ -83,9 +81,5 @@ module.exports = {
     loginUser
 }
 
-
-
-
-
-
 // error to be solve -> register krte time hmko dekhana hai ki ye username phle se used hai 
+// need to work on

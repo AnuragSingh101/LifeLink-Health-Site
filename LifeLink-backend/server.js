@@ -55,8 +55,6 @@ app.use('/api/donor', donorRoute);
 // campign Routes 
 app.use('/api/campign', campignRoute);
 
-
-
 // running this server in local host 5000
 const port = process.env.PORT || 5000;
 
