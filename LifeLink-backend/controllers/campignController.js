@@ -1,21 +1,68 @@
 const mongoose = require('mongoose');
-
-
-const getCampign = () => {
-    res.json({msg : "This function is to get all the details of the nearby Area "})
+const Campaign = require('../models/Campign')
+const getCampign = async (req, res) => {
+    try {
+        const campaigns = await Campaign.find();
+        res.status(200).json({message: "All campigns",campaigns: campaigns});
+    } catch (error) {
+        res.status(500).json({message: "Error", error});
+    }
 }
-
-
-const postCampign = () => {
-    res.json({msg : "This function is to post about New campign held in the nearby area"})
+const postCampign = async (req, res) => {
+    try {
+        const { title, description, startDate, endDate, location, organizer, contactInfo } = req.body;
+        const campaign = new Campaign({title,description,startDate,endDate,location,organizer,contactInfo});
+        const savedCampaign = await campaign.save();
+        res.status(201).json({message: "Campaign created successfully",campaign: savedCampaign});
+    } catch (error) {
+        res.status(500).json({message: "Error creating campaign",error: error.message});
+    }
 }
+const updateCampign = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updatedData = req.body;
 
-const updateCampign = () => {
-    res.json({msg : "This function is to update previous campaign details"})
-}
+        // Find the campaign by ID and update it with new data
+        const updatedCampaign = await Campaign.findByIdAndUpdate(id, updatedData, { new: true });
 
-const deleteCampign = () => {
-    res.json({msg : "This function is to delete the campaign that is completed"})
+        if (!updatedCampaign) {
+            return res.status(404).json({ message: "Campaign not found" });
+        }
+
+        res.status(200).json({
+            message: "Campaign updated successfully",
+            campaign: updatedCampaign
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: "Error updating campaign",
+            error: error.message
+        });
+    }
 }
+// Delete a campaign by ID
+const deleteCampign = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        // Find the campaign by ID and delete it
+        const deletedCampaign = await Campaign.findByIdAndDelete(id);
+
+        if (!deletedCampaign) {
+            return res.status(404).json({ message: "Campaign not found" });
+        }
+
+        res.status(200).json({
+            message: "Campaign deleted successfully",
+            campaign: deletedCampaign
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: "Error deleting campaign",
+            error: error.message
+        });
+    }
+};
 
 module.exports = {getCampign, postCampign, updateCampign, deleteCampign}

@@ -15,7 +15,7 @@ const adminRoute = require('./routes/adminRoute')
 const userRoutes = require('./routes/userRoutes')
 const bloodInventoryRoutes = require('./routes/BloodRoutes');
 const donorRoute = require('./routes/DonorRoute')
-const campignRoute = require('./routes/')
+const campignRoute = require('./routes/campignRoute')
 
 // Add this middleware to parse JSON bodies
 app.use(express.json());
