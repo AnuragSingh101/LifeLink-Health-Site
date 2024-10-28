@@ -2,19 +2,19 @@
 
 const express = require('express');
 const router = express.Router();
-const {} = require('../controllers/campignController');
+const {getCampign, postCampign, updateCampign, deleteCampign} = require('../controllers/campignController');
 
 // POST route to add new blood inventory
-router.post('/add', );
+router.post('/add', postCampign);
 
 // GET route to read all blood inventory
-router.get('/', );
+router.get('/', getCampign);
 
 // PUT route to update existing blood inventory
-router.put('/update/:id', );
+router.put('/update/:id', updateCampign);
 
 // DELETE route to delete blood inventory
-router.delete('/delete/:id', );
+router.delete('/delete/:id', deleteCampign);
 
 // Export the router
 module.exports = router;
