@@ -1,73 +1,56 @@
+// src/components/NavBar.js
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
-  // State to check if user is logged in
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
-  // Effect to check for token and listen for login/logout events
   useEffect(() => {
     const token = localStorage.getItem('token');
     setIsLoggedIn(!!token);
 
-    // Event listener to update state on login/logout
     const handleStorageChange = () => {
       const token = localStorage.getItem('token');
       setIsLoggedIn(!!token);
     };
 
-    // Attach the event listener
     window.addEventListener('storage', handleStorageChange);
 
-    // Clean up the event listener on component unmount
     return () => {
       window.removeEventListener('storage', handleStorageChange);
     };
   }, []);
 
-  // Function to handle logout
   const handleLogout = () => {
-    localStorage.removeItem('token'); // Clear token
-    setIsLoggedIn(false); // Update state to logged out
-    navigate('/'); // Redirect to the home page
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+    navigate('/');
   };
 
-  // Profile Icon Component
-  // const ProfileIcon = () => (
-  //   <img src="src/icons/profile.png" alt="Profile" />
-  // );
-
   return (
-    <nav className="flex justify-between items-center p-6 bg-white shadow-md">
-      <div className="text-2xl font-bold">LifeLink</div>
-      <ul className="flex space-x-8">
-        {isLoggedIn ? (
+    <nav className="bg-gradient-to-br from-blue-600 to-blue-300 text-white p-5 shadow-md flex justify-between items-center">
+      <div className="text-2xl font-extrabold tracking-wider">Life Link</div>
+      <ul className="flex space-x-6 text-lg">
+        <li><Link to="/" className="hover:text-gray-200 transition">Home</Link></li>
+        <li><Link to="/about" className="hover:text-gray-200 transition">ABOUT</Link></li>
+        <li><Link to="/contact" className="hover:text-gray-200 transition">CONTACT US</Link></li>
+        {isLoggedIn && (
           <>
-            <li><Link to="/" className="text-black hover:text-gray-600">Home</Link></li>
-            <li><Link to="/about" className="text-black hover:text-gray-600">ABOUT</Link></li>
-            <li><Link to="/contact" className="text-black hover:text-gray-600">CONTACT US</Link></li>
-            <li><Link to="/inventory" className="text-black hover:text-gray-600">INVENTORY</Link></li>
-            <li><Link to="/donors" className="text-black hover:text-gray-600">DONOR</Link></li>
-            <li><Link to="/campaign" className="text-black hover:text-gray-600">CAMPAIGN</Link></li>
-          </>
-        ) : (
-          <>
-            <li><Link to="/" className="text-black hover:text-gray-600">Home</Link></li>
-            <li><Link to="/about" className="text-black hover:text-gray-600">ABOUT</Link></li>
-            <li><Link to="/contact" className="text-black hover:text-gray-600">CONTACT US</Link></li>
-            <li><Link to="/login" className="text-black hover:text-gray-600">LOGIN</Link></li>
+            <li><Link to="/inventory" className="hover:text-gray-200 transition">INVENTORY</Link></li>
+            <li><Link to="/donors" className="hover:text-gray-200 transition">DONOR</Link></li>
+            <li><Link to="/campaign" className="hover:text-gray-200 transition">CAMPAIGN</Link></li>
           </>
         )}
+        {!isLoggedIn && (
+          <li><Link to="/login" className="hover:text-gray-200 transition">LOGIN</Link></li>
+        )}
       </ul>
-      <div className="text-xl">
+      <div className="text-lg">
         {isLoggedIn ? (
-          <div>
-            {/* <ProfileIcon /> */}
-            <button onClick={handleLogout} className="text-black hover:text-gray-600 ml-4">LOGOUT</button>
-          </div>
+          <button onClick={handleLogout} className="hover:text-gray-200 transition">LOGOUT</button>
         ) : (
-          <i className="fas fa-user-circle text-purple-400"></i>
+          <i className="fas fa-user-circle text-gray-300"></i>
         )}
       </div>
     </nav>

@@ -80,8 +80,7 @@ const CampaignDetailModal = ({ campaign, onClose }) => {
 
         <button 
           className="mt-2 text-gray-500 hover:text-red-500 absolute top-2 right-2"
-          onClick={onClose}
-        >
+          onClick={onClose}>
           Close
         </button>
       </div>

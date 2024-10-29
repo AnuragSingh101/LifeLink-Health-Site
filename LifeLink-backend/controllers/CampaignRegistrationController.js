@@ -12,15 +12,20 @@ const createRegistration = async (req, res) => {
 };
 
 // Get all registrations
-const getAllRegistrations = async (req, res) => {
-  try {
-    const registrations = await CampaignRegistration.find()
-      .populate('campaignId', 'title') // Populating campaign details
-      .populate('userId', 'fullName email'); // Populating user details
-    res.status(200).json(registrations);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+const getAllRegistrations= async (req, res) => {
+  const { email, campaignId } = req.body;
+
+  // Check if a registration already exists for this email and campaign
+  const existingRegistration = await CampaignRegistration.findOne({ email, campaignId });
+  
+  if (existingRegistration) {
+    return res.status(400).json({ message: 'You are already registered for this campaign.' });
   }
+
+  // Proceed to create a new registration
+  const newRegistration = new CampaignRegistration(req.body);
+  await newRegistration.save();
+  res.status(200).json({ message: 'Registration successful.' });
 };
 
 // Get a registration by ID

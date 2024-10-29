@@ -14,6 +14,7 @@ import Donors from './components/Pages/Donors';
 import ContactUs from './components/Pages/ContactUs';
 import CampaignsPage from './components/Pages/Campaign';
 import CampaignRegistrationForm from './components/Pages/CampaignRegistrationForm';
+import Home from './components/Pages/Try';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -23,7 +24,7 @@ function App() {
       <Router>
         <NavBar />
         <Routes>
-          <Route path='/' element={<HomePage />} />
+          <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='/inventory' element={<BloodInventoryList />} />

@@ -16,9 +16,7 @@ const campaignRegistrationSchema = new mongoose.Schema({
     required: true,
   },
   email: {
-    type: String,
-    required: true,
-    unique: true, // Ensure each email is unique
+    type: String, // Ensure each email is unique
   },
   phone: {
     type: String,
