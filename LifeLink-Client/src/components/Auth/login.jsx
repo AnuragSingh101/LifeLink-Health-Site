@@ -20,18 +20,24 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', credentials);
-      const { token, user } = response.data;
-      const { role } = user;
-      localStorage.setItem('token', token);
-      localStorage.setItem('role', role);
-      navigate('/inventory');
-      alert('Login successful');
+        const response = await axios.post('http://localhost:5000/api/auth/login', credentials);
+        const { token, user } = response.data; // Accessing user object correctly
+        const userId = user.id; // Make sure you access 'id' here
+        const { role } = user;
+
+        // Store the token and user ID in local storage
+        localStorage.setItem('token', token);
+        localStorage.setItem('userId', userId); // Store user ID
+        localStorage.setItem('role', role);
+        
+        navigate('/inventory');
+        alert('Login successful');
     } catch (error) {
-      console.error('Login failed', error);
-      alert('Invalid username or password');
+        console.error('Login failed', error);
+        alert('Invalid username or password');
     }
-  };
+};
+
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-200 flex items-center justify-center">

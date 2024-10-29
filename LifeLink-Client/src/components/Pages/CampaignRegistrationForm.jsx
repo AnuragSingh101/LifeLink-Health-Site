@@ -1,18 +1,17 @@
-// src/components/CampaignRegistrationForm.js
-
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const CampaignRegistrationForm = ({ campaignId, onClose }) => {
+const CampaignRegistrationForm = ({ campaignId, onClose }) => { // Accept campaignId and onClose as props
   const [formData, setFormData] = useState({
-    userId: '',
+    campaignId,
+    userId: '', // You can keep this to hold the userId value but it will be set later
     fullName: '',
     email: '',
     phone: '',
+    status: 'Pending', // Default status
   });
 
   const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,26 +21,38 @@ const CampaignRegistrationForm = ({ campaignId, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    setSuccess('');
+  
+    // Fetch userId from local storage
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      setError('User ID not found. Please log in.');
+      return;
+    }
+
+    // Update formData with userId from local storage
+    const registrationData = {
+      ...formData,
+      userId, // Assign the fetched userId here
+    };
 
     try {
-      const response = await axios.post('http://localhost:5000/api/campaign/registration', {
-        ...formData,
-        campaignId,
-        status: 'Pending', // Set status directly here
-      });
-
+      const response = await axios.post('http://localhost:5000/api/campign/registration/', registrationData);
       if (response.status === 200) {
-        setSuccess('Registration successful!');
+        // Show pop-up notification
+        alert('You are registered successfully!');
+  
         // Clear the form fields
         setFormData({
-          userId: '',
+          campaignId,
+          userId: '', // Reset userId field (not visible to user)
           fullName: '',
           email: '',
           phone: '',
+          status: 'Pending',
         });
-        // Call the onClose function to close the modal
-        onClose(); // Close the modal directly after registration
+  
+        // Reload the page
+        window.location.reload();
       }
     } catch (error) {
       setError(error.response ? error.response.data.message : 'An error occurred.');
@@ -52,20 +63,8 @@ const CampaignRegistrationForm = ({ campaignId, onClose }) => {
     <div className="p-6 border-t mt-4 w-full max-w-lg mx-auto bg-white shadow-md rounded-lg">
       <h2 className="text-2xl font-bold mb-4">Register for Campaign</h2>
       {error && <p className="text-red-500">{error}</p>}
-      {success && <p className="text-green-500">{success}</p>}
       <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label htmlFor="userId" className="block text-sm font-medium">User ID:</label>
-          <input
-            type="text"
-            id="userId"
-            name="userId"
-            value={formData.userId}
-            onChange={handleChange}
-            required
-            className="border p-3 rounded w-full mt-1"
-          />
-        </div>
+        {/* Removed User ID Field */}
         <div className="mb-4">
           <label htmlFor="fullName" className="block text-sm font-medium">Full Name:</label>
           <input
@@ -100,6 +99,17 @@ const CampaignRegistrationForm = ({ campaignId, onClose }) => {
             onChange={handleChange}
             required
             className="border p-3 rounded w-full mt-1"
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="status" className="block text-sm font-medium">Status:</label>
+          <input
+            type="text"
+            id="status"
+            name="status"
+            value={formData.status}
+            readOnly
+            className="border p-3 rounded w-full mt-1 bg-gray-100 cursor-not-allowed"
           />
         </div>
         <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded mt-4 w-full">

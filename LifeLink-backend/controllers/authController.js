@@ -56,7 +56,8 @@ const loginUser = async (req, res) => {
         console.log('userdata',{
             firstName: user.firstName,
             lastName: user.lastName,
-            role: user.role
+            role: user.role,
+            id: user._id
         })
         // generating a jwt for the authentication 
         const token = jwt.sign({ id: user._id, role: user.role, firstName: user.firstName, lastName: user.lastName }, process.env.JWT_SECRET, { expiresIn: '1h' });

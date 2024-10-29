@@ -29,7 +29,11 @@ const userSchema = mongoose.Schema({
         type: String,
         default: 'user',
         enum: ['user', 'admin'],  // Defining roles
-    }
+    },
+    registeredCampaigns: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Campaign', // Reference to the Campaign model
+      }],
 })
 
 

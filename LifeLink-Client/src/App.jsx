@@ -31,7 +31,7 @@ function App() {
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<ContactUs />} />
           <Route path='/campaign' element={<CampaignsPage />} />
-          <Route path="/registration" element={<CampaignRegistrationForm />} />
+          {/* <Route path="/registration" element={<CampaignRegistrationForm />} /> */}
         </Routes>
       </Router>
     </>
