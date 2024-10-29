@@ -23,9 +23,9 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="max-w-2xl w-full p-4 bg-white rounded-lg shadow-md">
-        <h1 className="text-2xl font-bold text-red-600 text-center mb-4">Contact Us</h1>
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-blue-50 via-blue-100 to-gray-50 p-4">
+      <div className="max-w-2xl w-full p-6 bg-white rounded-lg shadow-md">
+        <h1 className="text-3xl font-bold text-blue-600 text-center mb-6">Contact Us</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700">
@@ -38,7 +38,7 @@ const ContactUs = () => {
               required
               value={formData.name}
               onChange={handleChange}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -53,7 +53,7 @@ const ContactUs = () => {
               required
               value={formData.email}
               onChange={handleChange}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -68,14 +68,14 @@ const ContactUs = () => {
               rows="4"
               value={formData.message}
               onChange={handleChange}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
           <div>
             <button
               type="submit"
-              className="w-full bg-red-600 text-white font-semibold py-2 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="w-full bg-blue-600 text-white font-semibold py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               Send Message
             </button>

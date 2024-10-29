@@ -15,6 +15,8 @@ import ContactUs from './components/Pages/ContactUs';
 import CampaignsPage from './components/Pages/Campaign';
 import CampaignRegistrationForm from './components/Pages/CampaignRegistrationForm';
 import Home from './components/Pages/Try';
+import AddBloodInventory from './components/Pages/AddBloodInventoryModal';
+
 
 function App() {
   const [count, setCount] = useState(0);
@@ -24,7 +26,7 @@ function App() {
       <Router>
         <NavBar />
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<HomePage />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='/inventory' element={<BloodInventoryList />} />
@@ -32,7 +34,7 @@ function App() {
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<ContactUs />} />
           <Route path='/campaign' element={<CampaignsPage />} />
-          {/* <Route path="/registration" element={<CampaignRegistrationForm />} /> */}
+          <Route path="/add-blood-inventory" element={<AddBloodInventory />} />
         </Routes>
       </Router>
     </>
