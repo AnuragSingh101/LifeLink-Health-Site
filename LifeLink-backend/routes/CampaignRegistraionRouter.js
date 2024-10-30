@@ -15,4 +15,5 @@ router.get('/:id', getRegistrationById);
 router.put('/:id', updateRegistration);
 router.delete('/:id', deleteRegistration);
 
+
 module.exports = router;

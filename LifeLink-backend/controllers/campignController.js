@@ -8,6 +8,21 @@ const getCampign = async (req, res) => {
         res.status(500).json({message: "Error", error});
     }
 }
+
+const getRegisteredUsers = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const campaign = await Campaign.findById(id).populate('registeredUsers');
+        if (!campaign) {
+            return res.status(404).json({ message: "Campaign not found" });
+        }
+        res.status(200).json({ registeredUsers: campaign.registeredUsers || [] });
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching registered users", error: error.message });
+    }
+};
+
+
 const postCampign = async (req, res) => {
     try {
         const { title, description, startDate, endDate, location, organizer, contactInfo } = req.body;
@@ -43,4 +58,4 @@ const deleteCampign = async (req, res) => {
         res.status(500).json({message: "Error deleting campaign",error: error.message});
     }
 };
-module.exports = {getCampign, postCampign, updateCampign, deleteCampign}
+module.exports = {getCampign, postCampign, updateCampign, deleteCampign, getRegisteredUsers}

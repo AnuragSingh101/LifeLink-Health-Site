@@ -1,9 +1,12 @@
+// src/components/Pages/CampaignDetailModal.jsx
+
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import CampaignRegistrationForm from './CampaignRegistrationForm';
 
 const CampaignDetailModal = ({ campaign, onClose }) => {
   const [isFormVisible, setFormVisible] = useState(false);
-  const [registeredUsers, setRegisteredUsers] = useState([]);
+  const [registeredUsers, setRegisteredUsers] = useState([]); // Default to an empty array
   const [showUsers, setShowUsers] = useState(false);
 
   const toggleFormVisibility = () => {
@@ -12,8 +15,8 @@ const CampaignDetailModal = ({ campaign, onClose }) => {
 
   const fetchRegisteredUsers = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/campaign/${campaign._id}/registered-users`);
-      setRegisteredUsers(response.data);
+      const response = await axios.get(`http://localhost:5000/api/campign/${campaign._id}/registered-users`);
+      setRegisteredUsers(Array.isArray(response.data.registeredUsers) ? response.data.registeredUsers : []);
       setShowUsers(true);
     } catch (error) {
       console.error('Error fetching registered users:', error);
@@ -60,8 +63,8 @@ const CampaignDetailModal = ({ campaign, onClose }) => {
         {isFormVisible && (
           <div className="mt-4">
             <CampaignRegistrationForm 
-              campaignId={campaign._id} // Pass the campaign ID
-              onClose={onClose} // Close the modal on successful registration
+              campaignId={campaign._id}
+              onClose={onClose}
             />
           </div>
         )}
@@ -69,11 +72,15 @@ const CampaignDetailModal = ({ campaign, onClose }) => {
         {/* Display registered users if showUsers is true */}
         {showUsers && (
           <div className="mt-4">
-            <h4 className="text-xl font-semibold">  Check Registered Users:</h4>
+            <h4 className="text-xl font-semibold">Registered Users:</h4>
             <ul className="list-disc list-inside">
-              {registeredUsers.map(user => (
-                <li key={user.id}>{user.fullName} - {user.email}</li>
-              ))}
+              {registeredUsers.length > 0 ? (
+                registeredUsers.map(user => (
+                  <li key={user._id}>{user.fullName} - {user.email}</li>
+                ))
+              ) : (
+                <p>No registered users found.</p>
+              )}
             </ul>
           </div>
         )}

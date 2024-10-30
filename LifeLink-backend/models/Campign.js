@@ -36,10 +36,7 @@ const campaignSchema = new mongoose.Schema({
             required: true
         }
     },
-    registeredUsers: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'  // Assuming you have a User schema for registered users
-    }],
+    registeredUsers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     createdAt: {
         type: Date,
         default: Date.now
