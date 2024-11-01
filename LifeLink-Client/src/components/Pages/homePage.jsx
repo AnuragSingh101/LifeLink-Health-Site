@@ -1,10 +1,9 @@
-// src/pages/Home.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { FaHeartbeat, FaUsers, FaRegStar, FaRegHeart, FaHandsHelping, FaDonate } from 'react-icons/fa';
 
-const Home = () => {
+const HomePage = () => {
   const [stats, setStats] = useState({ bloodUnits: 0, donors: 0, campaigns: 0 });
 
   useEffect(() => {
@@ -26,114 +25,212 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="bg-gray-100 text-gray-800">
+    <div className="home-container">
       {/* Hero Section */}
-      <section className="relative h-screen flex flex-col justify-center items-center bg-gradient-to-br from-blue-600 to-blue-300 text-center">
-        <div className="absolute inset-0 bg-black opacity-30"></div>
-        <h1 className="relative text-5xl md:text-7xl font-extrabold text-white drop-shadow-lg">Join the Lifesaving Movement</h1>
-        <p className="relative mt-4 text-lg md:text-2xl text-gray-100 max-w-2xl drop-shadow-md">
+      <section className="hero-section">
+        <div className="hero-overlay"></div>
+        <h1 className="hero-title">Join the Lifesaving Movement</h1>
+        <p className="hero-subtitle">
           Your contribution can bring hope and healing. Step up today!
         </p>
-        <div className="relative mt-8 space-x-4">
-          <Link to="/register" className="bg-white text-blue-600 py-3 px-6 rounded-full font-semibold shadow-lg hover:bg-gray-200 transition">Become a Donor</Link>
-          <Link to="/campaigns" className="bg-blue-700 text-white py-3 px-6 rounded-full font-semibold shadow-lg hover:bg-blue-800 transition">See Campaigns</Link>
+        <div className="hero-buttons">
+          <Link to="/register" className="hero-button white-button">Become a Donor</Link>
+          <Link to="/campaigns" className="hero-button blue-button">See Campaigns</Link>
         </div>
       </section>
 
       {/* About Section */}
-      <section className="py-16 px-8 bg-gray-50 text-center">
-        <h2 className="text-4xl font-bold text-blue-600">About Life Link</h2>
-        <p className="mt-4 text-lg max-w-3xl mx-auto text-gray-700">
+      <section className="about-section">
+        <h2 className="section-title">About Life Link</h2>
+        <p className="section-text">
           Life Link is on a mission to bridge the gap between blood donors and recipients. Join us in making blood donation accessible and life-saving for those who need it most.
         </p>
       </section>
 
       {/* Campaign Spotlight */}
-      <section className="py-16 bg-white text-center">
-        <h2 className="text-4xl font-bold text-blue-600">Featured Campaign</h2>
-        <div className="mt-8 max-w-4xl mx-auto flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-          <div className="bg-gray-50 rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
-            <img src="/path-to-campaign-image.jpg" alt="Campaign" className="w-full h-64 object-cover" />
-            <div className="p-6">
-              <h3 className="text-3xl font-bold text-blue-700">Community Blood Drive</h3>
-              <p className="mt-2 text-gray-700">Join us at the City Center for our community blood drive and make a difference.</p>
-              <p className="mt-4 font-semibold text-gray-800">Date: Nov 15, 2024</p>
-              <p className="mt-2 font-semibold text-gray-800">Location: City Center Hall</p>
-              <Link to="/campaigns/1" className="mt-4 inline-block bg-blue-600 text-white py-2 px-6 rounded-full font-semibold hover:bg-blue-700 transition">
-                Join Now
-              </Link>
-            </div>
+      <section className="spotlight-section">
+        <h2 className="section-title">Featured Campaign</h2>
+        <div className="campaign-card">
+          <img src="/path-to-campaign-image.jpg" alt="Campaign" className="campaign-image" />
+          <div className="campaign-info">
+            <h3 className="campaign-title">Community Blood Drive</h3>
+            <p className="campaign-description">Join us at the City Center for our community blood drive and make a difference.</p>
+            <p className="campaign-details">Date: Nov 15, 2024</p>
+            <p className="campaign-details">Location: City Center Hall</p>
+            <Link to="/campaigns/1" className="campaign-link">Join Now</Link>
           </div>
         </div>
       </section>
 
       {/* How It Works Section */}
-      <section id="how-it-works" className="py-20 bg-white text-center">
-        <h3 className="text-4xl font-bold text-[#2c3e50]">How It Works</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-12 px-4 md:px-20">
-          {/* Step 1 */}
-          <div className="text-center">
-            <FaRegHeart className="text-[#f39c12] text-6xl mx-auto mb-4" />
-            <h4 className="text-xl font-bold text-gray-800">Register</h4>
-            <p className="mt-2 text-gray-600">Sign up as a donor or campaign supporter.</p>
+      <section className="how-it-works-section">
+        <h3 className="section-title">How It Works</h3>
+        <div className="how-it-works-steps">
+          <div className="step">
+            <FaRegHeart className="step-icon" />
+            <h4 className="step-title">Register</h4>
+            <p className="step-text">Sign up as a donor or campaign supporter.</p>
           </div>
-          {/* Step 2 */}
-          <div className="text-center">
-            <FaHandsHelping className="text-[#f39c12] text-6xl mx-auto mb-4" />
-            <h4 className="text-xl font-bold text-gray-800">Find a Campaign</h4>
-            <p className="mt-2 text-gray-600">Browse and join nearby blood donation events.</p>
+          <div className="step">
+            <FaHandsHelping className="step-icon" />
+            <h4 className="step-title">Find a Campaign</h4>
+            <p className="step-text">Browse and join nearby blood donation events.</p>
           </div>
-          {/* Step 3 */}
-          <div className="text-center">
-            <FaDonate className="text-[#f39c12] text-6xl mx-auto mb-4" />
-            <h4 className="text-xl font-bold text-gray-800">Donate</h4>
-            <p className="mt-2 text-gray-600">Arrive on the scheduled date and donate safely.</p>
+          <div className="step">
+            <FaDonate className="step-icon" />
+            <h4 className="step-title">Donate</h4>
+            <p className="step-text">Arrive on the scheduled date and donate safely.</p>
           </div>
         </div>
       </section>
 
       {/* Upcoming Campaigns Section */}
-      <section className="py-16 bg-gray-50 text-center">
-        <h2 className="text-4xl font-bold text-blue-600">Upcoming Campaigns</h2>
-        <div className="mt-8 max-w-4xl mx-auto flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
-            <img src="/path-to-upcoming-campaign-image.jpg" alt="Upcoming Campaign" className="w-full h-64 object-cover" />
-            <div className="p-6">
-              <h3 className="text-3xl font-bold text-blue-700">Annual Blood Donation Drive</h3>
-              <p className="mt-2 text-gray-700">Help us reach our goal this year to collect 500 units of blood!</p>
-              <p className="mt-4 font-semibold text-gray-800">Date: Dec 10, 2024</p>
-              <p className="mt-2 font-semibold text-gray-800">Location: Community Hall</p>
-              <Link to="/campaigns/2" className="mt-4 inline-block bg-blue-600 text-white py-2 px-6 rounded-full font-semibold hover:bg-blue-700 transition">
-                Join Now
-              </Link>
+      <section className="upcoming-campaigns-section">
+        <h2 className="section-title">Upcoming Campaigns</h2>
+        <div className="campaigns">
+          <div className="campaign-card">
+            <img src="/path-to-upcoming-campaign-image.jpg" alt="Upcoming Campaign" className="campaign-image" />
+            <div className="campaign-info">
+              <h3 className="campaign-title">Annual Blood Donation Drive</h3>
+              <p className="campaign-description">Help us reach our goal this year to collect 500 units of blood!</p>
+              <p className="campaign-details">Date: Dec 10, 2024</p>
+              <p className="campaign-details">Location: Community Hall</p>
+              <Link to="/campaigns/2" className="campaign-link">Join Now</Link>
             </div>
           </div>
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
-            <img src="/path-to-upcoming-campaign-image.jpg" alt="Upcoming Campaign" className="w-full h-64 object-cover" />
-            <div className="p-6">
-              <h3 className="text-3xl font-bold text-blue-700">Special Holiday Blood Drive</h3>
-              <p className="mt-2 text-gray-700">Join us in giving the gift of life this holiday season.</p>
-              <p className="mt-4 font-semibold text-gray-800">Date: Dec 25, 2024</p>
-              <p className="mt-2 font-semibold text-gray-800">Location: Central Park</p>
-              <Link to="/campaigns/3" className="mt-4 inline-block bg-blue-600 text-white py-2 px-6 rounded-full font-semibold hover:bg-blue-700 transition">
-                Join Now
-              </Link>
+          <div className="campaign-card">
+            <img src="/path-to-upcoming-campaign-image.jpg" alt="Upcoming Campaign" className="campaign-image" />
+            <div className="campaign-info">
+              <h3 className="campaign-title">Special Holiday Blood Drive</h3>
+              <p className="campaign-description">Join us in giving the gift of life this holiday season.</p>
+              <p className="campaign-details">Date: Dec 25, 2024</p>
+              <p className="campaign-details">Location: Central Park</p>
+              <Link to="/campaigns/3" className="campaign-link">Join Now</Link>
             </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-8 bg-gray-800 text-gray-300 text-center">
+      <footer className="footer">
         <p>&copy; 2024 Life Link. All rights reserved.</p>
-        <div className="flex justify-center mt-4 space-x-4">
-          <a href="#" className="hover:text-blue-400">Facebook</a>
-          <a href="#" className="hover:text-blue-400">Twitter</a>
-          <a href="#" className="hover:text-blue-400">Instagram</a>
+        <div className="footer-links">
+          <a href="#">Facebook</a>
+          <a href="#">Twitter</a>
+          <a href="#">Instagram</a>
         </div>
       </footer>
+
+      <style jsx>{`
+        .home-container {
+          background-color: #f3f4f6;
+          color: #1a202c;
+        }
+
+        /* Hero Section */
+        .hero-section {
+          height: 100vh;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          text-align: center;
+          background: linear-gradient(to bottom right, #0077b6, #00b4d8);
+        }
+        .hero-overlay {
+          position: absolute;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.3);
+        }
+        .hero-title {
+          font-size: 3rem;
+          font-weight: 700;
+          color: #ffffff;
+          z-index: 1;
+        }
+        .hero-subtitle {
+          margin-top: 1rem;
+          font-size: 1.25rem;
+          color: #f1f1f1;
+          max-width: 40rem;
+          z-index: 1;
+        }
+        .hero-buttons {
+          margin-top: 2rem;
+          z-index: 1;
+        }
+        .hero-button {
+          padding: 0.75rem 1.5rem;
+          font-weight: 600;
+          border-radius: 9999px;
+          text-transform: uppercase;
+          transition: background-color 0.3s;
+        }
+        .white-button {
+          background-color: #ffffff;
+          color: #0077b6;
+        }
+        .blue-button {
+          background-color: #005f99;
+          color: #ffffff;
+        }
+
+        /* Other Sections */
+        .section-title {
+          font-size: 2.5rem;
+          font-weight: 700;
+          color: #0077b6;
+          margin-bottom: 1rem;
+        }
+        .section-text {
+          font-size: 1.125rem;
+          color: #4a5568;
+          max-width: 48rem;
+          margin: 0 auto;
+        }
+
+        /* Campaign Cards */
+        .campaign-card {
+          background-color: #ffffff;
+          border-radius: 0.5rem;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          transition: transform 0.3s;
+        }
+        .campaign-image {
+          width: 100%;
+          height: 16rem;
+          object-fit: cover;
+        }
+        .campaign-info {
+          padding: 1.5rem;
+        }
+        .campaign-link {
+          display: inline-block;
+          background-color: #0077b6;
+          color: #ffffff;
+          padding: 0.5rem 1.5rem;
+          border-radius: 9999px;
+          margin-top: 1rem;
+          font-weight: 600;
+          transition: background-color 0.3s;
+        }
+
+        /* Footer */
+        .footer {
+          background-color: #1a202c;
+          color: #e2e8f0;
+          padding: 2rem;
+          text-align: center;
+        }
+        .footer-links a {
+          color: #00b4d8;
+          margin: 0 1rem;
+          transition: color 0.3s;
+        }
+      `}</style>
     </div>
   );
 };
 
-export default Home;
+export default HomePage;

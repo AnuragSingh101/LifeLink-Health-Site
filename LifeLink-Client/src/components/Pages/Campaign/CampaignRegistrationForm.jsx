@@ -60,13 +60,65 @@ const CampaignRegistrationForm = ({ campaignId, onClose }) => { // Accept campai
   };
 
   return (
-    <div className="p-6 border-t mt-4 w-full max-w-lg mx-auto bg-white shadow-md rounded-lg">
-      <h2 className="text-2xl font-bold mb-4">Register for Campaign</h2>
-      {error && <p className="text-red-500">{error}</p>}
+    <div className="form-container">
+      <style>{`
+        .form-container {
+          padding: 24px;
+          border-top: 1px solid #ccc;
+          margin-top: 16px;
+          width: 100%;
+          max-width: 600px;
+          margin-left: auto;
+          margin-right: auto;
+          background-color: white;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          border-radius: 8px;
+        }
+        .form-title {
+          font-size: 24px;
+          font-weight: bold;
+          margin-bottom: 16px;
+        }
+        .error-message {
+          color: red;
+          margin-bottom: 16px;
+        }
+        .form-group {
+          margin-bottom: 16px;
+        }
+        .form-label {
+          display: block;
+          font-size: 14px;
+          font-weight: medium;
+        }
+        .form-input {
+          border: 1px solid #ccc;
+          padding: 12px;
+          border-radius: 4px;
+          width: 100%;
+          margin-top: 8px;
+        }
+        .readonly-input {
+          background-color: #f7f7f7;
+          cursor: not-allowed;
+        }
+        .submit-button {
+          background-color: #007bff;
+          color: white;
+          padding: 12px;
+          border-radius: 4px;
+          width: 100%;
+          margin-top: 16px;
+          cursor: pointer;
+        }
+      `}</style>
+
+      <h2 className="form-title">Register for Campaign</h2>
+      {error && <p className="error-message">{error}</p>}
       <form onSubmit={handleSubmit}>
         {/* Removed User ID Field */}
-        <div className="mb-4">
-          <label htmlFor="fullName" className="block text-sm font-medium">Full Name:</label>
+        <div className="form-group">
+          <label htmlFor="fullName" className="form-label">Full Name:</label>
           <input
             type="text"
             id="fullName"
@@ -74,11 +126,11 @@ const CampaignRegistrationForm = ({ campaignId, onClose }) => { // Accept campai
             value={formData.fullName}
             onChange={handleChange}
             required
-            className="border p-3 rounded w-full mt-1"
+            className="form-input"
           />
         </div>
-        <div className="mb-4">
-          <label htmlFor="email" className="block text-sm font-medium">Email:</label>
+        <div className="form-group">
+          <label htmlFor="email" className="form-label">Email:</label>
           <input
             type="email"
             id="email"
@@ -86,11 +138,11 @@ const CampaignRegistrationForm = ({ campaignId, onClose }) => { // Accept campai
             value={formData.email}
             onChange={handleChange}
             required
-            className="border p-3 rounded w-full mt-1"
+            className="form-input"
           />
         </div>
-        <div className="mb-4">
-          <label htmlFor="phone" className="block text-sm font-medium">Phone:</label>
+        <div className="form-group">
+          <label htmlFor="phone" className="form-label">Phone:</label>
           <input
             type="text"
             id="phone"
@@ -98,21 +150,21 @@ const CampaignRegistrationForm = ({ campaignId, onClose }) => { // Accept campai
             value={formData.phone}
             onChange={handleChange}
             required
-            className="border p-3 rounded w-full mt-1"
+            className="form-input"
           />
         </div>
-        <div className="mb-4">
-          <label htmlFor="status" className="block text-sm font-medium">Status:</label>
+        <div className="form-group">
+          <label htmlFor="status" className="form-label">Status:</label>
           <input
             type="text"
             id="status"
             name="status"
             value={formData.status}
             readOnly
-            className="border p-3 rounded w-full mt-1 bg-gray-100 cursor-not-allowed"
+            className={`form-input readonly-input`}
           />
         </div>
-        <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded mt-4 w-full">
+        <button type="submit" className="submit-button">
           Register
         </button>
       </form>

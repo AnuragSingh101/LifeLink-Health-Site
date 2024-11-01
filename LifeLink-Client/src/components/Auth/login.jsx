@@ -39,57 +39,141 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-3xl font-semibold text-center text-blue-600 mb-6">Login</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="login-container">
+      <div className="login-form">
+        <h2 className="login-title">Login</h2>
+        <form onSubmit={handleSubmit} className="form-fields">
           {/* Email Field */}
-          <div className="mb-4">
-            <label className="block text-gray-700 font-medium mb-2">Email</label>
+          <div className="form-group">
+            <label className="form-label">Email</label>
             <input
               type="email"
               name="email"
               value={credentials.email}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition ease-in-out duration-150"
+              className="form-input"
               placeholder="Enter your email"
             />
           </div>
 
           {/* Password Field */}
-          <div className="mb-4">
-            <label className="block text-gray-700 font-medium mb-2">Password</label>
+          <div className="form-group">
+            <label className="form-label">Password</label>
             <input
               type="password"
               name="password"
               value={credentials.password}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition ease-in-out duration-150"
+              className="form-input"
               placeholder="Enter your password"
             />
           </div>
 
           {/* Login Button */}
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white font-medium py-2 px-4 rounded-md hover:bg-blue-700 transition ease-in-out duration-300"
-          >
+          <button type="submit" className="login-button">
             Login
           </button>
         </form>
 
         {/* Registration Prompt */}
-        <div className="mt-4 text-center">
-          <p className="text-gray-600">
+        <div className="registration-prompt">
+          <p>
             Don't have an account?{' '}
-            <a href="/register" className="text-blue-600 hover:underline">
+            <a href="/register" className="registration-link">
               Register
             </a>
           </p>
         </div>
       </div>
+
+      <style jsx>{`
+        body {
+          margin: 0;
+          font-family: Arial, sans-serif;
+        }
+
+        .login-container {
+          min-height: 100vh;
+          background-color: #f1f5f9; /* Light Gray */
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .login-form {
+          background-color: #ffffff; /* Clean White */
+          padding: 2rem;
+          border-radius: 0.5rem;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+          width: 100%;
+          max-width: 400px;
+        }
+
+        .login-title {
+          font-size: 2rem;
+          font-weight: 600;
+          text-align: center;
+          color: #0077b6; /* Calm Blue */
+          margin-bottom: 1.5rem;
+        }
+
+        .form-fields {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .form-group {
+          margin-bottom: 1rem;
+        }
+
+        .form-label {
+          display: block;
+          color: #333333; /* Dark Gray */
+          font-weight: 500;
+          margin-bottom: 0.5rem;
+        }
+
+        .form-input {
+          width: 100%;
+          padding: 0.5rem 1rem;
+          border: 1px solid #d1d5db; /* Border color */
+          border-radius: 0.375rem;
+          transition: border-color 0.15s ease-in-out;
+        }
+
+        .form-input:focus {
+          outline: none;
+          border-color: #0077b6; /* Calm Blue */
+        }
+
+        .login-button {
+          width: 100%;
+          background-color: #0077b6; /* Calm Blue */
+          color: white;
+          font-weight: 500;
+          padding: 0.5rem 1rem;
+          border-radius: 0.375rem;
+          transition: background-color 0.3s ease-in-out;
+          border: none;
+        }
+
+        .login-button:hover {
+          background-color: #005f8c; /* Darker Blue for hover effect */
+        }
+
+        .registration-prompt {
+          margin-top: 1rem;
+          text-align: center;
+        }
+
+        .registration-link {
+          color: #0077b6; /* Calm Blue */
+          text-decoration: underline;
+        }
+      `}</style>
     </div>
   );
 };

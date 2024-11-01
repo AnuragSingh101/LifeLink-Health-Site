@@ -17,9 +17,9 @@ const BloodInventoryList = () => {
       try {
         const response = await axios.get('http://localhost:5000/api/bloodInventory');
         setBloodInventory(response.data);
-        setLoading(false);
       } catch (error) {
         setError('Error fetching blood inventory');
+      } finally {
         setLoading(false);
       }
     };
@@ -32,29 +32,114 @@ const BloodInventoryList = () => {
   };
 
   const handleUpdate = (id) => {
-    navigate(`/update-blood-inventory/${id}`); // Assuming you have a route for updating
+    navigate(`/update-blood-inventory/${id}`);
   };
 
   const handleDelete = async (id) => {
-    try {
-      await axios.delete(`http://localhost:5000/api/bloodInventory/${id}`);
-      setBloodInventory(bloodInventory.filter(blood => blood._id !== id));
-    } catch (error) {
-      console.error('Error deleting blood entry:', error);
-      setError('Error deleting blood entry');
+    const confirmed = window.confirm('Are you sure you want to delete this entry?');
+    if (confirmed) {
+      try {
+        await axios.delete(`http://localhost:5000/api/bloodInventory/${id}`);
+        setBloodInventory(bloodInventory.filter(blood => blood._id !== id));
+      } catch (error) {
+        console.error('Error deleting blood entry:', error);
+        setError('Error deleting blood entry');
+      }
     }
   };
 
-  if (loading) return <p className="text-center text-gray-700">Loading...</p>;
-  if (error) return <p className="text-center text-red-600">{error}</p>;
+  if (loading) return <p className="loadingMessage">Loading...</p>;
+  if (error) return <p className="loadingMessage">{error}</p>;
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-gradient-to-b from-pink-50 to-gray-50 min-h-screen">
-      <h1 className="text-4xl font-bold text-blue-600 mb-6 text-center">Blood Inventory List</h1>
+    <div className="container">
+
+      
+      <style>{`
+        .container {
+          max-width: 64rem;
+          margin: 0 auto;
+          padding: 1.5rem;
+          background: linear-gradient(to bottom, #FFE4E6, #F3F4F6);
+          min-height: 100vh;
+        }
+        .title {
+          font-size: 2.5rem;
+          font-weight: bold;
+          color: #2563EB;
+          text-align: center;
+          margin-bottom: 1.5rem;
+        }
+        .addButton {
+          background-color: #2563EB;
+          color: #FFFFFF;
+          padding: 0.5rem 1rem;
+          border-radius: 0.375rem;
+          cursor: pointer;
+          transition: background-color 0.3s;
+        }
+        .addButton:hover {
+          background-color: #1E40AF;
+        }
+        .emptyMessage, .loadingMessage {
+          text-align: center;
+          color: #6B7280;
+        }
+        .inventoryList {
+          list-style-type: none;
+          padding: 0;
+        }
+        .inventoryItem {
+          padding: 1.5rem;
+          border: 1px solid #2563EB;
+          border-radius: 0.5rem;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          background-color: #FFFFFF;
+          transition: box-shadow 0.3s;
+          margin-bottom: 1.5rem;
+        }
+        .inventoryItem:hover {
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        .infoTitle {
+          font-size: 1.25rem;
+          font-weight: 600;
+          color: #1D4ED8;
+        }
+        .itemDetails {
+          display: flex;
+          justify-content: space-between;
+          color: #1F2937;
+          margin-top: 0.5rem;
+        }
+        .actionButton {
+          padding: 0.25rem 0.75rem;
+          border-radius: 0.375rem;
+          cursor: pointer;
+          transition: background-color 0.3s;
+        }
+        .updateButton {
+          background-color: #F59E0B;
+          color: #FFFFFF;
+        }
+        .updateButton:hover {
+          background-color: #D97706;
+        }
+        .deleteButton {
+          background-color: #EF4444;
+          color: #FFFFFF;
+        }
+        .deleteButton:hover {
+          background-color: #B91C1C;
+        }
+      `}</style>
+
+
+      <h1 className="title">Blood Inventory List</h1>
       {userRole === 'admin' && (
         <div className="text-center mb-4">
           <button
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            className="addButton"
             onClick={handleAdd}
           >
             Add Blood Entry
@@ -62,32 +147,32 @@ const BloodInventoryList = () => {
         </div>
       )}
       {bloodInventory.length === 0 ? (
-        <p className="text-center text-gray-600">No blood inventory available.</p>
+        <p className="emptyMessage">No blood inventory available.</p>
       ) : (
-        <ul className="space-y-6">
+        <ul className="inventoryList">
           {bloodInventory.map((blood) => (
-            <li key={blood._id} className="p-6 border border-blue-500 rounded-lg shadow-lg bg-white hover:shadow-xl transition-shadow">
-              <h2 className="text-xl font-semibold text-blue-700">Blood Information</h2>
-              <div className="flex justify-between text-gray-800 mt-2">
+            <li key={blood._id} className="inventoryItem">
+              <h2 className="infoTitle">Blood Information</h2>
+              <div className="itemDetails">
                 <p><strong>Blood Type:</strong> {blood.bloodType}</p>
                 <p><strong>Quantity:</strong> {blood.quantity}G</p>
                 <p><strong>Status:</strong> {blood.status}</p>
               </div>
-              <div className="flex justify-between text-gray-800 mt-2">
+              <div className="itemDetails">
                 <p><strong>Donor Name:</strong> {blood.donorId?.name || 'N/A'}</p>
                 <p><strong>Expiration Date:</strong> {new Date(blood.expirationDate).toLocaleDateString()}</p>
               </div>
               {userRole === 'admin' && (
-                <div className="mt-4 flex justify-between">
+                <div className="itemDetails">
                   <button
                     onClick={() => handleUpdate(blood._id)}
-                    className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+                    className="actionButton updateButton"
                   >
                     Update
                   </button>
                   <button
                     onClick={() => handleDelete(blood._id)}
-                    className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                    className="actionButton deleteButton"
                   >
                     Delete
                   </button>

@@ -1,5 +1,3 @@
-// src/ContactUs.js
-
 import React, { useState } from 'react';
 
 const ContactUs = () => {
@@ -8,6 +6,7 @@ const ContactUs = () => {
     email: '',
     message: ''
   });
+  const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -16,16 +15,30 @@ const ContactUs = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission (e.g., send data to an API)
-    console.log(formData);
-    // Reset form after submission
-    setFormData({ name: '', email: '', message: '' });
+    // Reset submission status
+    setSubmitted(false);
+    
+    // Simple validation check
+    if (formData.name && formData.email && formData.message) {
+      // Handle form submission (e.g., send data to an API)
+      console.log(formData);
+      setSubmitted(true); // Show success message
+      // Reset form after submission
+      setFormData({ name: '', email: '', message: '' });
+    }
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-blue-50 via-blue-100 to-gray-50 p-4">
       <div className="max-w-2xl w-full p-6 bg-white rounded-lg shadow-md">
         <h1 className="text-3xl font-bold text-blue-600 text-center mb-6">Contact Us</h1>
+        
+        {submitted && (
+          <p className="text-center text-green-600 font-semibold mb-4">
+            Thank you for your message! We will get back to you soon.
+          </p>
+        )}
+        
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700">
