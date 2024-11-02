@@ -170,6 +170,7 @@ const About = () => {
           font-weight: 700;
         }
       `}</style>
+      
     </div>
   );
 };

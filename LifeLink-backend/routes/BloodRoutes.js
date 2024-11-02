@@ -6,11 +6,14 @@ const {
   addBloodInventory,
   getAllBloodInventory,
   updateBloodInventory,
-  deleteBloodInventory
+  deleteBloodInventory,
+  getBloodInventoryById
 } = require('../controllers/BloodController');
 
 // POST route to add new blood inventory
 router.post('/add', addBloodInventory);
+
+router.get('/:id', getBloodInventoryById);
 
 // GET route to read all blood inventory
 router.get('/', getAllBloodInventory);

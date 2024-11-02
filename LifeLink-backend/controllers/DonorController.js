@@ -14,11 +14,11 @@ exports.addDonor = async(req, res) => {
     }
 }
 
-exports.getAllDonor = async (req, res) => {
+exports.getAllDonors = async (req, res) => {
     try {
-        const donors= await Donor.find()
-        res.status(201).send(donors)
+      const donors = await Donor.find();
+      res.send(donors);
     } catch (error) {
-        res.status(401).json("There is an error while processing your request ")
+      res.status(500).send({ error: 'Error fetching donors', details: error.message });
     }
-}
+  };

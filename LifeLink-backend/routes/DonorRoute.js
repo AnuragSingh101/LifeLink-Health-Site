@@ -3,11 +3,11 @@
 const express = require('express');
 const router = express.Router();
 
-const {addDonor, getAllDonor} = require('../controllers/DonorController')
+const {addDonor, getAllDonors} = require('../controllers/DonorController')
 
 router.post('/addDonor', addDonor);
 
 
-router.get('/', getAllDonor);
+router.get('/', getAllDonors);
 
 module.exports = router

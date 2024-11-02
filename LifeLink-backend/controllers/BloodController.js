@@ -24,6 +24,24 @@ exports.getAllBloodInventory = async (req, res) => {
   }
 };
 
+// Get a specific blood inventory item by ID
+// controllers/bloodInventoryController.js
+
+exports.getBloodInventoryById = async (req, res) => {
+  try {
+    const bloodInventory = await BloodInventory.findById(req.params.id)
+      .populate('donorId', 'name age bloodType contactNumber');
+    if (!bloodInventory) {
+      return res.status(404).send({ error: 'Blood inventory not found' });
+    }
+    res.send(bloodInventory);
+  } catch (error) {
+    res.status(400).send({ error: 'Error fetching blood inventory', details: error.message });
+  }
+};
+
+
+
 // Function to update existing blood inventory
 exports.updateBloodInventory = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {

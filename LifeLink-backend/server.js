@@ -51,7 +51,7 @@ app.use('/api/user', userRoutes)
 app.use('/api/bloodInventory', bloodInventoryRoutes);
 
 // blood donor routes 
-app.use('/api/donor', donorRoute);
+app.use('/api/donors', donorRoute);
 
 // campign Routes 
 app.use('/api/campign', campignRoute);

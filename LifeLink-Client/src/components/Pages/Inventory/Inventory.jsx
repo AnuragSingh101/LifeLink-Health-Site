@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import UpdateInventory from './UpdateInventory';
+
 
 const BloodInventoryList = () => {
   const [bloodInventory, setBloodInventory] = useState([]);
@@ -39,7 +41,7 @@ const BloodInventoryList = () => {
     const confirmed = window.confirm('Are you sure you want to delete this entry?');
     if (confirmed) {
       try {
-        await axios.delete(`http://localhost:5000/api/bloodInventory/${id}`);
+        await axios.delete(`http://localhost:5000/api/bloodInventory/delete/${id}`);
         setBloodInventory(bloodInventory.filter(blood => blood._id !== id));
       } catch (error) {
         console.error('Error deleting blood entry:', error);
