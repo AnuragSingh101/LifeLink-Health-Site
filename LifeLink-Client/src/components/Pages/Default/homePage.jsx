@@ -35,20 +35,20 @@ const HomePage = () => {
         </p>
         <div className="hero-buttons">
           <Link to="/register" className="hero-button white-button">Become a Donor</Link>
-          <Link to="/campaigns" className="hero-button blue-button">See Campaigns</Link>
+          <Link to="/campaign" className="hero-button blue-button">See Campaigns</Link>
         </div>
       </section>
 
       {/* About Section */}
-      <section className="about-section">
+      {/* <section className="about-section">
         <h2 className="section-title">About Life Link</h2>
         <p className="section-text">
           Life Link is on a mission to bridge the gap between blood donors and recipients. Join us in making blood donation accessible and life-saving for those who need it most.
         </p>
-      </section>
+      </section> */}
 
       {/* Campaign Spotlight */}
-      <section className="spotlight-section">
+      {/* <section className="spotlight-section">
         <h2 className="section-title">Featured Campaign</h2>
         <div className="campaign-card">
           <img src="/path-to-campaign-image.jpg" alt="Campaign" className="campaign-image" />
@@ -60,10 +60,10 @@ const HomePage = () => {
             <Link to="/campaigns/1" className="campaign-link">Join Now</Link>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* How It Works Section */}
-      <section className="how-it-works-section">
+      {/* <section className="how-it-works-section">
         <h3 className="section-title">How It Works</h3>
         <div className="how-it-works-steps">
           <div className="step">
@@ -82,10 +82,10 @@ const HomePage = () => {
             <p className="step-text">Arrive on the scheduled date and donate safely.</p>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Upcoming Campaigns Section */}
-      <section className="upcoming-campaigns-section">
+      {/* <section className="upcoming-campaigns-section">
         <h2 className="section-title">Upcoming Campaigns</h2>
         <div className="campaigns">
           <div className="campaign-card">
@@ -109,7 +109,7 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Footer */}
       <footer className="footer">
@@ -129,7 +129,7 @@ const HomePage = () => {
 
         /* Hero Section */
         .hero-section {
-          height: 100vh;
+          height: 76.3vh;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -229,6 +229,7 @@ const HomePage = () => {
           transition: color 0.3s;
         }
       `}</style>
+
     </div>
   );
 };

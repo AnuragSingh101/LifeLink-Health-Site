@@ -7,7 +7,7 @@ export default function Donors() {
   useEffect(() => {
     const fetchDonors = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/donor');
+        const response = await axios.get('http://localhost:5000/api/donors');
         setDonors(response.data);
       } catch (error) {
         console.log('Error fetching donors:', error);
@@ -19,6 +19,7 @@ export default function Donors() {
 
   return (
     <div className="container">
+
       <style>{`
         .container {
           max-width: 64rem;
@@ -66,6 +67,7 @@ export default function Donors() {
           margin-top: 0.5rem;
         }
       `}</style>
+
       <h1 className="title">Donor Details</h1>
       {donors.length === 0 ? (
         <p className="emptyMessage">No donors available.</p>
