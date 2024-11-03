@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Donors() {
     const [donors, setDonors] = useState([]);
     const navigate = useNavigate();
+    const userRole = localStorage.getItem('role'); // Assuming the role is stored in local storage with the key 'role'
 
     useEffect(() => {
         const fetchDonors = async () => {
@@ -115,9 +116,13 @@ export default function Donors() {
             `}</style>
 
             <h1 className="title">Donor Details</h1>
-            <button className="addDonorButton" onClick={() => navigate('/addDonor')}>
-                Add Donor
-            </button>
+
+            {/* Only show Add Donor button for admins */}
+            {userRole === 'admin' && (
+                <button className="addDonorButton" onClick={() => navigate('/addDonor')}>
+                    Add Donor
+                </button>
+            )}
 
             {donors.length === 0 ? (
                 <p className="emptyMessage">No donors available.</p>
@@ -136,12 +141,17 @@ export default function Donors() {
                                 <p><strong>Last Donation Date:</strong> {new Date(donor.lastDonationDate).toLocaleDateString()}</p>
                             </div>
                             <div className="itemDetails">
-                                <button className="updateButton" onClick={() => navigate(`/updateDonor/${donor._id}`)}>
-                                    Update
-                                </button>
-                                <button className="deleteButton" onClick={() => handleDeleteDonor(donor._id)}>
-                                    Delete
-                                </button>
+                                {/* Only show Update and Delete buttons for admins */}
+                                {userRole === 'admin' && (
+                                    <>
+                                        <button className="updateButton" onClick={() => navigate(`/updateDonor/${donor._id}`)}>
+                                            Update
+                                        </button>
+                                        <button className="deleteButton" onClick={() => handleDeleteDonor(donor._id)}>
+                                            Delete
+                                        </button>
+                                    </>
+                                )}
                             </div>
                         </li>
                     ))}

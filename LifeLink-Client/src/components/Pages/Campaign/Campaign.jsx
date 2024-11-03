@@ -1,11 +1,19 @@
-// src/Components/CampaignPage.jsx
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import CampaignList from './CampaignCard'; // Ensure this is the correct component for listing campaigns
 
 const CampaignsPage = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token'); // Check if the user is logged in
+    if (!token) {
+      navigate('/login'); // Redirect to login if not logged in
+    }
+  }, [navigate]);
+
   return (
     <div className="container">
-      
       <style>{`
         .container {
           min-height: 100vh;
