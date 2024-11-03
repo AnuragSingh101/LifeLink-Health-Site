@@ -1,6 +1,63 @@
 // src/components/NavBar.js
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+
+const NavBarContainer = styled.nav`
+  background: #740938;
+  color: white;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .brand {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+  }
+
+  .nav-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    .nav-item {
+      margin-right: 24px;
+
+      a {
+        color: white;
+        font-size: 1.125rem; /* 18px */
+        text-decoration: none;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: #f1f1f1; /* Equivalent to Tailwind's gray-200 */
+        }
+      }
+    }
+  }
+
+  .logout-button {
+    font-size: 1.125rem; /* 18px */
+    color: white;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #f1f1f1; /* Equivalent to Tailwind's gray-200 */
+    }
+  }
+
+  .icon {
+    color: #d1d5db; /* Equivalent to Tailwind's gray-300 */
+    font-size: 24px; /* Adjust size as needed */
+  }
+`;
 
 const NavBar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -29,31 +86,31 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="bg-gradient-to-br from-blue-600 to-blue-300 text-white p-5 shadow-md flex justify-between items-center">
-      <div className="text-2xl font-extrabold tracking-wider">Life Link</div>
-      <ul className="flex space-x-6 text-lg">
-        <li><Link to="/" className="hover:text-gray-200 transition">Home</Link></li>
-        <li><Link to="/about" className="hover:text-gray-200 transition">ABOUT</Link></li>
-        <li><Link to="/contact" className="hover:text-gray-200 transition">CONTACT US</Link></li>
+    <NavBarContainer>
+      <div className="brand">Life Link</div>
+      <ul className="nav-list">
+        <li className="nav-item"><Link to="/">Home</Link></li>
+        <li className="nav-item"><Link to="/about">ABOUT</Link></li>
+        <li className="nav-item"><Link to="/contact">CONTACT US</Link></li>
         {isLoggedIn && (
           <>
-            <li><Link to="/inventory" className="hover:text-gray-200 transition">INVENTORY</Link></li>
-            <li><Link to="/donors" className="hover:text-gray-200 transition">DONOR</Link></li>
-            <li><Link to="/campaign" className="hover:text-gray-200 transition">CAMPAIGN</Link></li>
+            <li className="nav-item"><Link to="/inventory">INVENTORY</Link></li>
+            <li className="nav-item"><Link to="/donors">DONOR</Link></li>
+            <li className="nav-item"><Link to="/campaign">CAMPAIGN</Link></li>
           </>
         )}
         {!isLoggedIn && (
-          <li><Link to="/login" className="hover:text-gray-200 transition">LOGIN</Link></li>
+          <li className="nav-item"><Link to="/login">LOGIN</Link></li>
         )}
       </ul>
-      <div className="text-lg">
+      <div>
         {isLoggedIn ? (
-          <button onClick={handleLogout} className="hover:text-gray-200 transition">LOGOUT</button>
+          <button className="logout-button" onClick={handleLogout}>LOGOUT</button>
         ) : (
-          <i className="fas fa-user-circle text-gray-300"></i>
+          <i className="fas fa-user-circle icon"></i>
         )}
       </div>
-    </nav>
+    </NavBarContainer>
   );
 };
 

@@ -17,6 +17,9 @@ import CampaignRegistrationForm from './components/Pages/Campaign/CampaignRegist
 // import Home from './components/Pages/Try';
 import AddBloodInventory from './components/Pages/Inventory/AddBloodInventoryModal';
 import UpdateBloodInventory from './components/Pages/Inventory/UpdateInventory';
+import AddDonor from './components/Pages/Donor/AddDonor';
+import UpdateDonor from './components/Pages/Donor/UpdateDonor';
+
 
 
 function App() {
@@ -37,6 +40,9 @@ function App() {
           <Route path='/campaign' element={<CampaignsPage />} />
           <Route path="/add-blood-inventory" element={<AddBloodInventory />} />
           <Route path="/update-blood-inventory/:id" element={<UpdateBloodInventory />} />
+          <Route path="/addDonor" element={<AddDonor />} />
+          <Route path="/updateDonor/:id" element={<UpdateDonor />} />
+
         </Routes>
       </Router>
     </>

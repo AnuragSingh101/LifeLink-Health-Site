@@ -136,7 +136,7 @@ const HomePage = () => {
           justify-content: center;
           position: relative;
           text-align: center;
-          background: linear-gradient(to bottom right, #0077b6, #00b4d8);
+          background: linear-gradient(to bottom right, #FEF9F2, #FBFBFB);
         }
         .hero-overlay {
           position: absolute;
