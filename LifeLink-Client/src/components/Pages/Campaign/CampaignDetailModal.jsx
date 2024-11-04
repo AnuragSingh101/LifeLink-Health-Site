@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import CampaignRegistrationForm from './CampaignRegistrationForm';
 
 const CampaignDetailModal = ({ campaign, onClose }) => {
   const [isFormVisible, setFormVisible] = useState(false);
-  const [registeredUsers, setRegisteredUsers] = useState([]); // Default to an empty array
+  const [registeredUsers, setRegisteredUsers] = useState([]);
   const [showUsers, setShowUsers] = useState(false);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const toggleFormVisibility = () => {
     setFormVisible(!isFormVisible);
@@ -13,17 +15,21 @@ const CampaignDetailModal = ({ campaign, onClose }) => {
 
   const fetchRegisteredUsers = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/campign/${campaign._id}/registered-users`);
-      setRegisteredUsers(Array.isArray(response.data.registeredUsers) ? response.data.registeredUsers : []);
+      const response = await axios.get(`http://localhost:5000/api/campign/registration/${campaign._id}/registrations`);
+      setRegisteredUsers(Array.isArray(response.data) ? response.data : []);
       setShowUsers(true);
     } catch (error) {
       console.error('Error fetching registered users:', error);
     }
   };
 
+  const handleCheckRegisteredUsers = () => {
+    // Navigate to the registered users page
+    navigate(`/registered-users/${campaign._id}`);
+  };
+
   return (
     <div className="modal">
-      
       <style>{`
         .modal {
           position: fixed;
@@ -51,7 +57,7 @@ const CampaignDetailModal = ({ campaign, onClose }) => {
         .modal-title {
           font-size: 24px;
           font-weight: bold;
-          color: red;
+          color: #f94144; /* Using Coral Red for the title */
         }
         .modal-text {
           color: #4a4a4a;
@@ -70,10 +76,10 @@ const CampaignDetailModal = ({ campaign, onClose }) => {
           border: none;
         }
         .register-button {
-          background-color: red;
+          background-color: #f94144; /* Coral Red */
         }
         .check-users-button {
-          background-color: blue;
+          background-color: #0077b6; /* Calm Blue */
         }
         .close-button {
           position: absolute;
@@ -81,6 +87,16 @@ const CampaignDetailModal = ({ campaign, onClose }) => {
           right: 12px;
           color: #6c757d;
           cursor: pointer;
+        }
+        .user-item {
+          margin: 8px 0; /* Space between user items */
+        }
+        .user-email {
+          color: #333; /* Dark Gray for email */
+        }
+        .user-phone {
+          color: #00b4d8; /* Soft Green for phone */
+          font-style: italic; /* Italicize phone numbers for emphasis */
         }
       `}</style>
 
@@ -112,7 +128,7 @@ const CampaignDetailModal = ({ campaign, onClose }) => {
         
         <button 
           className="modal-button check-users-button"
-          onClick={fetchRegisteredUsers}
+          onClick={handleCheckRegisteredUsers} // Change the onClick handler
         >
           Check Registered Users
         </button>
@@ -132,7 +148,9 @@ const CampaignDetailModal = ({ campaign, onClose }) => {
             <ul style={{ listStyleType: 'disc', paddingLeft: '20px' }}>
               {registeredUsers.length > 0 ? (
                 registeredUsers.map(user => (
-                  <li key={user._id}>{user.fullName} - {user.email}</li>
+                  <li key={user._id} className="user-item">
+                    {user.fullName} - <span className="user-email">{user.email}</span> - <span className="user-phone">{user.phone}</span>
+                  </li>
                 ))
               ) : (
                 <p>No registered users found.</p>

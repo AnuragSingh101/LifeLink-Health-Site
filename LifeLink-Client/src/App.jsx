@@ -19,6 +19,9 @@ import AddBloodInventory from './components/Pages/Inventory/AddBloodInventoryMod
 import UpdateBloodInventory from './components/Pages/Inventory/UpdateInventory';
 import AddDonor from './components/Pages/Donor/AddDonor';
 import UpdateDonor from './components/Pages/Donor/UpdateDonor';
+import RegisteredUsers from './components/Pages/Campaign/registeredUser';
+import AddCampaign from './components/Pages/Campaign/AddCampaign';
+
 
 
 
@@ -42,6 +45,10 @@ function App() {
           <Route path="/update-blood-inventory/:id" element={<UpdateBloodInventory />} />
           <Route path="/addDonor" element={<AddDonor />} />
           <Route path="/updateDonor/:id" element={<UpdateDonor />} />
+          <Route path="/registered-users/:campaignId" element={<RegisteredUsers />} />
+          <Route path="/add-campaign" element={<AddCampaign />} />
+
+
 
         </Routes>
       </Router>
