@@ -21,6 +21,8 @@ import AddDonor from './components/Pages/Donor/AddDonor';
 import UpdateDonor from './components/Pages/Donor/UpdateDonor';
 import RegisteredUsers from './components/Pages/Campaign/registeredUser';
 import AddCampaign from './components/Pages/Campaign/AddCampaign';
+import ApprovedUsers from './components/Pages/Campaign/DonorStatus/ApprovedUsers';
+import RejectedUsers from './components/Pages/Campaign/DonorStatus/RejectedUsers';
 
 
 
@@ -47,6 +49,8 @@ function App() {
           <Route path="/updateDonor/:id" element={<UpdateDonor />} />
           <Route path="/registered-users/:campaignId" element={<RegisteredUsers />} />
           <Route path="/add-campaign" element={<AddCampaign />} />
+          <Route path="/approved-users" element={<ApprovedUsers />} />
+          <Route path="/rejected-users" element={<RejectedUsers />} />
 
 
 

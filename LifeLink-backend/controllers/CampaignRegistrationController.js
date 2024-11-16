@@ -1,4 +1,4 @@
-const CampaignRegistration = require('../models/CampaignRegistration'); // Adjust the path as necessary
+const CampaignRegistration = require('../models/CampaignRegistration'); 
 
 // Create a new registration
 const createRegistration = async (req, res) => {
@@ -12,12 +12,12 @@ const createRegistration = async (req, res) => {
 };
 
 const getRegistrationsByCampaignId = async (req, res) => {
-  const { campaignId } = req.params; // Get campaignId from request parameters
+  const { campaignId } = req.params;
 
   try {
     // Find registrations matching the provided campaignId
     const registrations = await CampaignRegistration.find({ campaignId })
-      .populate('userId', 'fullName email phone') // Optionally populate user data
+      .populate('userId', 'fullName email phone') 
       .exec();
 
     if (!registrations.length) {
@@ -71,7 +71,7 @@ const updateRegistration = async (req, res) => {
     const updatedRegistration = await CampaignRegistration.findByIdAndUpdate(
       req.params.id,
       req.body,
-      { new: true, runValidators: true } // Return the updated document
+      { new: true, runValidators: true }
     );
 
     if (!updatedRegistration) {
@@ -93,11 +93,21 @@ const deleteRegistration = async (req, res) => {
       return res.status(404).json({ message: 'Registration not found' });
     }
 
-    res.status(204).json(); // No content
+    res.status(204).json();
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+
+
+const approveDonor = async (req, res) => {
+  try {
+    
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
 
 module.exports = {
   createRegistration,

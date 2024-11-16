@@ -1,45 +1,101 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { FaCheck, FaTimes } from 'react-icons/fa';
 
 const RegisteredUsers = () => {
-  const { campaignId } = useParams(); // Extract campaignId from URL params
+  const { campaignId } = useParams();
+  const navigate = useNavigate();
   const [registeredUsers, setRegisteredUsers] = useState([]);
+  const [approvedUsers, setApprovedUsers] = useState([]);
+  const [rejectedUsers, setRejectedUsers] = useState([]);
 
+  // Fetch registered users from the backend
   useEffect(() => {
     const fetchRegisteredUsers = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/campign/registration/${campaignId}/registrations`);
-        setRegisteredUsers(response.data); // Assuming the response data is an array of users
+        const response = await axios.get(
+          `http://localhost:5000/api/campign/registration/${campaignId}/registrations`
+        );
+        setRegisteredUsers(response.data);
       } catch (error) {
         console.error('Error fetching registered users:', error);
       }
     };
 
     fetchRegisteredUsers();
-  }, [campaignId]); // Run the effect whenever campaignId changes
+  }, [campaignId]);
+
+  // Handle Approve action
+  const handleApprove = (user) => {
+    setApprovedUsers([...approvedUsers, user]);
+    setRegisteredUsers(registeredUsers.filter((u) => u._id !== user._id));
+  };
+
+  // Handle Reject action
+  const handleReject = (user) => {
+    setRejectedUsers([...rejectedUsers, user]);
+    setRegisteredUsers(registeredUsers.filter((u) => u._id !== user._id));
+  };
+
+  // Navigate to Approved Users Page
+  const goToApprovedPage = () => {
+    navigate('/approved-users', { state: { users: approvedUsers } });
+  };
+
+  // Navigate to Rejected Users Page
+  const goToRejectedPage = () => {
+    navigate('/rejected-users', { state: { users: rejectedUsers } });
+  };
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold text-center mb-4">Registered Users</h2>
+    <div className="max-w-lg mx-auto p-4">
+      <h2 className="text-xl font-bold text-center mb-4">Registered Users</h2>
 
-      <ul className="space-y-4">
-        {registeredUsers.map(user => (
-          <li key={user._id} className="flex items-center justify-between p-4 bg-gray-100 rounded-lg shadow-sm">
-            <div className="flex space-x-4">
-              <div className="flex flex-col">
+      {registeredUsers.length === 0 ? (
+        <p className="text-center text-gray-500">No users registered yet.</p>
+      ) : (
+        <ul>
+          {registeredUsers.map((user) => (
+            <li key={user._id} className="border-b py-4 flex justify-between items-center">
+              <div>
                 <p className="font-semibold">{user.fullName}</p>
-                <p className="text-sm text-gray-600">{user.email}</p>
+                <p className="text-gray-600">{user.email}</p>
               </div>
-            </div>
+              <div className="flex space-x-2">
+                <button
+                  onClick={() => handleApprove(user)}
+                  className="flex items-center bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
+                >
+                  <FaCheck className="mr-1" /> Approve
+                </button>
+                <button
+                  onClick={() => handleReject(user)}
+                  className="flex items-center bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                >
+                  <FaTimes className="mr-1" /> Reject
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
 
-            <div className="flex items-center space-x-4">
-              <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Approve</button>
-              <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Reject</button>
-            </div>
-          </li>
-        ))}
-      </ul>
+      {/* Navigation Buttons to Approved and Rejected Users Pages */}
+      <div className="mt-6 flex justify-between">
+        <button
+          onClick={goToApprovedPage}
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+        >
+          View Approved Users
+        </button>
+        <button
+          onClick={goToRejectedPage}
+          className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
+        >
+          View Rejected Users
+        </button>
+      </div>
     </div>
   );
 };
