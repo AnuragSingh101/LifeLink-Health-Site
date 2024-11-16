@@ -1,4 +1,3 @@
-// src/components/AddBloodInventory.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -15,8 +14,10 @@ const AddBloodInventory = () => {
   useEffect(() => {
     const fetchDonors = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/donor'); // Adjust to your endpoint
-        setDonors(response.data);
+        const response = await axios.get('http://localhost:5000/api/donors');
+        console.log('Response data:', response.data); // Log to check the response structure
+        // Check if response contains an array of donors
+        setDonors(Array.isArray(response.data.donors) ? response.data.donors : []);
       } catch (error) {
         setError('Error fetching donors');
         console.error(error);
@@ -98,11 +99,15 @@ const AddBloodInventory = () => {
             required
           >
             <option value="">Select Donor</option>
-            {donors.map((donor) => (
-              <option key={donor._id} value={donor._id}>
-                {donor.name}
-              </option>
-            ))}
+            {Array.isArray(donors) && donors.length > 0 ? (
+              donors.map((donor) => (
+                <option key={donor._id} value={donor._id}>
+                  {donor.name}
+                </option>
+              ))
+            ) : (
+              <option disabled>No donors available</option>
+            )}
           </select>
         </div>
         <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">

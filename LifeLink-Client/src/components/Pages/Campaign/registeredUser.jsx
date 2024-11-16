@@ -20,11 +20,24 @@ const RegisteredUsers = () => {
   }, [campaignId]); // Run the effect whenever campaignId changes
 
   return (
-    <div>
-      <h2>Registered Users</h2>
-      <ul>
+    <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold text-center mb-4">Registered Users</h2>
+
+      <ul className="space-y-4">
         {registeredUsers.map(user => (
-          <li key={user._id}>{user.fullName} - {user.email}</li>
+          <li key={user._id} className="flex items-center justify-between p-4 bg-gray-100 rounded-lg shadow-sm">
+            <div className="flex space-x-4">
+              <div className="flex flex-col">
+                <p className="font-semibold">{user.fullName}</p>
+                <p className="text-sm text-gray-600">{user.email}</p>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-4">
+              <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Approve</button>
+              <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Reject</button>
+            </div>
+          </li>
         ))}
       </ul>
     </div>
