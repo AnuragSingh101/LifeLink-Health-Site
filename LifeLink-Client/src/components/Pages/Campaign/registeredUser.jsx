@@ -15,7 +15,7 @@ const RegisteredUsers = () => {
   useEffect(() => {
     const fetchRegisteredUsers = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/campign/registration/${campaignId}/`);
+        const response = await axios.get(`http://localhost:5000/api/campign/registration/${campaignId}/registrations`);
         setRegisteredUsers(response.data); // Assuming the response data is an array of users
       } catch (error) {
         console.error('Error fetching registered users:', error);

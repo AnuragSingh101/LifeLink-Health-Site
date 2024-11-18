@@ -43,7 +43,7 @@ const HomePage = () => {
       />
 
       {/* NavBar */}
-      <NavBar />
+      {/* <NavBar /> */}
       
       {/* Content Section */}
       <div style={{
