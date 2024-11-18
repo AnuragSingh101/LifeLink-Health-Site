@@ -1,6 +1,49 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CampaignList from './CampaignCard'; // Ensure this is the correct component for listing campaigns
+import styled from 'styled-components';
+
+const PageContainer = styled.div`
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #e0f7fa, #bbdefb); /* Light Blue gradient for a calming effect */
+  padding: 1.5rem;
+`;
+
+const Title = styled.h1`
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  color: #0077b6; /* Calming Blue */
+  margin-bottom: 2rem;
+`;
+
+const Description = styled.p`
+  font-size: 1.125rem;
+  color: #4b5563; /* Dark Gray for readability */
+  text-align: center;
+  margin-bottom: 1.5rem;
+`;
+
+const AddCampaignButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+`;
+
+const Button = styled.button`
+  background-color: #0077b6; /* Calm Blue */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #005f8c; /* Darker shade for hover effect */
+  }
+`;
 
 const CampaignsPage = () => {
   const navigate = useNavigate();
@@ -24,61 +67,22 @@ const CampaignsPage = () => {
   };
 
   return (
-    <div className="container">
-      <style>{`
-        .container {
-          min-height: 100vh;
-          background: linear-gradient(to bottom, #ebf8ff, #bfdbfe);
-          padding: 1.5rem;
-        }
-        .title {
-          font-size: 2.5rem;
-          font-weight: bold;
-          text-align: center;
-          color: #2c3e50;
-          margin-bottom: 2rem;
-        }
-        .description {
-          font-size: 1.125rem;
-          color: #4b5563;
-          text-align: center;
-          margin-bottom: 1.5rem;
-        }
-        .add-campaign-button {
-          display: flex;
-          justify-content: center;
-          margin-bottom: 2rem;
-        }
-        .button {
-          background-color: #0077b6; /* Calm Blue */
-          color: white;
-          border: none;
-          border-radius: 5px;
-          padding: 10px 20px;
-          cursor: pointer;
-          font-size: 1rem;
-          transition: background-color 0.3s ease;
-        }
-        .button:hover {
-          background-color: #005f8c; /* Darker shade for hover effect */
-        }
-      `}</style>
-      
-      <h1 className="title">Upcoming Blood Donation Campaigns</h1>
-      <p className="description">
+    <PageContainer>
+      <Title>Upcoming Blood Donation Campaigns</Title>
+      <Description>
         Join us in our efforts to save lives through blood donation. Here are the upcoming campaigns you can participate in.
-      </p>
+      </Description>
 
       {isAdmin() && (
-        <div className="add-campaign-button">
-          <button className="button" onClick={handleAddCampaign}>
+        <AddCampaignButtonContainer>
+          <Button onClick={handleAddCampaign}>
             Add New Campaign
-          </button>
-        </div>
+          </Button>
+        </AddCampaignButtonContainer>
       )}
 
       <CampaignList />
-    </div>
+    </PageContainer>
   );
 };
 

@@ -91,19 +91,19 @@ const Login = () => {
       <style jsx>{`
         body {
           margin: 0;
-          font-family: Arial, sans-serif;
+          font-family: 'Roboto', sans-serif; /* Healthcare-inspired clean font */
         }
 
         .login-container {
           min-height: 100vh;
-          background-color: #f1f5f9; /* Light Gray */
+          background-color: #e0f7fa; /* Light Blue - Healthcare color */
           display: flex;
           align-items: center;
           justify-content: center;
         }
 
         .login-form {
-          background-color: #ffffff; /* Clean White */
+          background-color: #ffffff; /* White for a clean, professional look */
           padding: 2rem;
           border-radius: 0.5rem;
           box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -113,9 +113,9 @@ const Login = () => {
 
         .login-title {
           font-size: 2rem;
-          font-weight: 600;
+          font-weight: 700;
           text-align: center;
-          color: #0077b6; /* Calm Blue */
+          color: #0077b6; /* Calming Blue */
           margin-bottom: 1.5rem;
         }
 
@@ -131,37 +131,37 @@ const Login = () => {
 
         .form-label {
           display: block;
-          color: #333333; /* Dark Gray */
+          color: #333333; /* Dark Gray for text */
           font-weight: 500;
           margin-bottom: 0.5rem;
         }
 
         .form-input {
           width: 100%;
-          padding: 0.5rem 1rem;
-          border: 1px solid #d1d5db; /* Border color */
+          padding: 0.75rem;
+          border: 1px solid #d1d5db; /* Light Gray border */
           border-radius: 0.375rem;
           transition: border-color 0.15s ease-in-out;
         }
 
         .form-input:focus {
           outline: none;
-          border-color: #0077b6; /* Calm Blue */
+          border-color: #0077b6; /* Calming Blue border on focus */
         }
 
         .login-button {
           width: 100%;
           background-color: #0077b6; /* Calm Blue */
           color: white;
-          font-weight: 500;
-          padding: 0.5rem 1rem;
+          font-weight: 600;
+          padding: 0.75rem;
           border-radius: 0.375rem;
           transition: background-color 0.3s ease-in-out;
           border: none;
         }
 
         .login-button:hover {
-          background-color: #005f8c; /* Darker Blue for hover effect */
+          background-color: #005f8c; /* Darker Blue on hover */
         }
 
         .registration-prompt {

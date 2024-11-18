@@ -33,7 +33,7 @@ function App() {
   return (
     <>
       <Router>
-        <NavBar />
+        {/* <NavBar /> */}
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/login' element={<Login />} />

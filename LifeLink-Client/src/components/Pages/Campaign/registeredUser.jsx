@@ -9,6 +9,7 @@ const RegisteredUsers = () => {
   const [registeredUsers, setRegisteredUsers] = useState([]);
   const [approvedUsers, setApprovedUsers] = useState([]);
   const [rejectedUsers, setRejectedUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState(null); // State to manage selected user for the popup
 
   // Fetch registered users from the backend
   useEffect(() => {
@@ -27,15 +28,40 @@ const RegisteredUsers = () => {
   }, [campaignId]);
 
   // Handle Approve action
-  const handleApprove = (user) => {
-    setApprovedUsers([...approvedUsers, user]);
-    setRegisteredUsers(registeredUsers.filter((u) => u._id !== user._id));
+  const handleApprove = async (user) => {
+    try {
+      // Send the campaignId and userId to the backend to approve the user
+      const response = await axios.post(
+        `http://localhost:5000/api/campaign/registration/approve/${campaignId}/${user._id}`
+      );
+  
+      if (response.status === 200) {
+        // If the approval is successful, move the user to the approved list in the frontend state
+        setApprovedUsers([...approvedUsers, user]);
+        setRegisteredUsers(registeredUsers.filter((u) => u._id !== user._id));
+  
+        // Optionally, show a success message or notification
+        alert('User approved and saved to the approved list.');
+      }
+  
+      setSelectedUser(null); // Close the modal after approval
+    } catch (error) {
+      console.error('Error approving user:', error);
+      alert('An error occurred while approving the user.');
+    }
   };
+  
 
   // Handle Reject action
-  const handleReject = (user) => {
-    setRejectedUsers([...rejectedUsers, user]);
-    setRegisteredUsers(registeredUsers.filter((u) => u._id !== user._id));
+  const handleReject = async (user) => {
+    try {
+      await axios.post(`http://localhost:5000/api/campaign/reject/${user._id}`);
+      setRejectedUsers([...rejectedUsers, user]);
+      setRegisteredUsers(registeredUsers.filter((u) => u._id !== user._id));
+      setSelectedUser(null); // Close modal after rejection
+    } catch (error) {
+      console.error('Error rejecting user:', error);
+    }
   };
 
   // Navigate to Approved Users Page
@@ -48,6 +74,16 @@ const RegisteredUsers = () => {
     navigate('/rejected-users', { state: { users: rejectedUsers } });
   };
 
+  // Function to open the modal with user details
+  const openModal = (user) => {
+    setSelectedUser(user);
+  };
+
+  // Function to close the modal
+  const closeModal = () => {
+    setSelectedUser(null);
+  };
+
   return (
     <div className="max-w-lg mx-auto p-4">
       <h2 className="text-xl font-bold text-center mb-4">Registered Users</h2>
@@ -57,24 +93,14 @@ const RegisteredUsers = () => {
       ) : (
         <ul>
           {registeredUsers.map((user) => (
-            <li key={user._id} className="border-b py-4 flex justify-between items-center">
+            <li
+              key={user._id}
+              className="border-b py-4 flex justify-between items-center cursor-pointer"
+              onClick={() => openModal(user)} // Open modal on click
+            >
               <div>
                 <p className="font-semibold">{user.fullName}</p>
                 <p className="text-gray-600">{user.email}</p>
-              </div>
-              <div className="flex space-x-2">
-                <button
-                  onClick={() => handleApprove(user)}
-                  className="flex items-center bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
-                >
-                  <FaCheck className="mr-1" /> Approve
-                </button>
-                <button
-                  onClick={() => handleReject(user)}
-                  className="flex items-center bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
-                >
-                  <FaTimes className="mr-1" /> Reject
-                </button>
               </div>
             </li>
           ))}
@@ -96,6 +122,51 @@ const RegisteredUsers = () => {
           View Rejected Users
         </button>
       </div>
+
+      {/* Modal for showing donor details with Approve/Reject buttons and File Upload */}
+      {selectedUser && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md">
+            <h3 className="text-xl font-bold mb-4">Donor Details</h3>
+            <p><strong>Name:</strong> {selectedUser.fullName}</p>
+            <p><strong>Email:</strong> {selectedUser.email}</p>
+            <p><strong>Phone:</strong> {selectedUser.phone}</p>
+            <p><strong>Address:</strong> {selectedUser.address}</p>
+
+            {/* File Upload Section */}
+            <div className="mt-4">
+              <label className="block font-semibold mb-2">Upload Blood Details:</label>
+              <input
+                type="file"
+                className="block w-full text-gray-700 border border-gray-300 rounded-md cursor-pointer"
+                placeholder="Choose file"
+              />
+            </div>
+
+            {/* Approve and Reject Buttons inside the modal */}
+            <div className="mt-6 flex justify-end space-x-4">
+              <button
+                onClick={() => handleApprove(selectedUser)}
+                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 flex items-center"
+              >
+                <FaCheck className="mr-1" /> Approve
+              </button>
+              <button
+                onClick={() => handleReject(selectedUser)}
+                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 flex items-center"
+              >
+                <FaTimes className="mr-1" /> Reject
+              </button>
+              <button
+                onClick={closeModal}
+                className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
