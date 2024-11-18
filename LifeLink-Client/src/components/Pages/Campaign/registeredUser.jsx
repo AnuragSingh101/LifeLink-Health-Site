@@ -4,21 +4,19 @@ import axios from 'axios';
 import { FaCheck, FaTimes } from 'react-icons/fa';
 
 const RegisteredUsers = () => {
-  const { campaignId } = useParams();
+  const { campaignId } = useParams(); // Extract campaignId from URL params
   const navigate = useNavigate();
+  
   const [registeredUsers, setRegisteredUsers] = useState([]);
   const [approvedUsers, setApprovedUsers] = useState([]);
   const [rejectedUsers, setRejectedUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null); // State to manage selected user for the popup
 
-  // Fetch registered users from the backend
   useEffect(() => {
     const fetchRegisteredUsers = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:5000/api/campign/registration/${campaignId}/registrations`
-        );
-        setRegisteredUsers(response.data);
+        const response = await axios.get(`http://localhost:5000/api/campign/registration/${campaignId}/`);
+        setRegisteredUsers(response.data); // Assuming the response data is an array of users
       } catch (error) {
         console.error('Error fetching registered users:', error);
       }
@@ -30,27 +28,18 @@ const RegisteredUsers = () => {
   // Handle Approve action
   const handleApprove = async (user) => {
     try {
-      // Send the campaignId and userId to the backend to approve the user
-      const response = await axios.post(
-        `http://localhost:5000/api/campaign/registration/approve/${campaignId}/${user._id}`
-      );
-  
+      const response = await axios.post(`http://localhost:5000/api/campaign/registration/approve/${campaignId}/${user._id}`);
       if (response.status === 200) {
-        // If the approval is successful, move the user to the approved list in the frontend state
         setApprovedUsers([...approvedUsers, user]);
         setRegisteredUsers(registeredUsers.filter((u) => u._id !== user._id));
-  
-        // Optionally, show a success message or notification
         alert('User approved and saved to the approved list.');
       }
-  
-      setSelectedUser(null); // Close the modal after approval
+      setSelectedUser(null);
     } catch (error) {
       console.error('Error approving user:', error);
       alert('An error occurred while approving the user.');
     }
   };
-  
 
   // Handle Reject action
   const handleReject = async (user) => {
@@ -58,7 +47,8 @@ const RegisteredUsers = () => {
       await axios.post(`http://localhost:5000/api/campaign/reject/${user._id}`);
       setRejectedUsers([...rejectedUsers, user]);
       setRegisteredUsers(registeredUsers.filter((u) => u._id !== user._id));
-      setSelectedUser(null); // Close modal after rejection
+      alert('User rejected.');
+      setSelectedUser(null);
     } catch (error) {
       console.error('Error rejecting user:', error);
     }
@@ -85,8 +75,8 @@ const RegisteredUsers = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-4">
-      <h2 className="text-xl font-bold text-center mb-4">Registered Users</h2>
+    <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold text-center mb-4">Registered Users</h2>
 
       {registeredUsers.length === 0 ? (
         <p className="text-center text-gray-500">No users registered yet.</p>
@@ -96,11 +86,11 @@ const RegisteredUsers = () => {
             <li
               key={user._id}
               className="border-b py-4 flex justify-between items-center cursor-pointer"
-              onClick={() => openModal(user)} // Open modal on click
+              onClick={() => openModal(user)}
             >
               <div>
                 <p className="font-semibold">{user.fullName}</p>
-                <p className="text-gray-600">{user.email}</p>
+                <p className="text-sm text-gray-600">{user.email}</p>
               </div>
             </li>
           ))}
@@ -123,7 +113,7 @@ const RegisteredUsers = () => {
         </button>
       </div>
 
-      {/* Modal for showing donor details with Approve/Reject buttons and File Upload */}
+      {/* Modal for showing donor details with Approve/Reject buttons */}
       {selectedUser && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-6 rounded-lg shadow-lg max-w-md">
@@ -132,16 +122,6 @@ const RegisteredUsers = () => {
             <p><strong>Email:</strong> {selectedUser.email}</p>
             <p><strong>Phone:</strong> {selectedUser.phone}</p>
             <p><strong>Address:</strong> {selectedUser.address}</p>
-
-            {/* File Upload Section */}
-            <div className="mt-4">
-              <label className="block font-semibold mb-2">Upload Blood Details:</label>
-              <input
-                type="file"
-                className="block w-full text-gray-700 border border-gray-300 rounded-md cursor-pointer"
-                placeholder="Choose file"
-              />
-            </div>
 
             {/* Approve and Reject Buttons inside the modal */}
             <div className="mt-6 flex justify-end space-x-4">

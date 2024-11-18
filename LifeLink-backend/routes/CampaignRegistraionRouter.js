@@ -1,6 +1,6 @@
 const express = require('express');
 const {
-  createRegistration,
+  registerForCampaign,
   getAllRegistrations,
   getRegistrationById,
   updateRegistration,
@@ -11,13 +11,13 @@ const {
 
 const router = express.Router();
 
-router.post('/', createRegistration);
+router.post('/', registerForCampaign);
 router.get('/', getAllRegistrations);
 router.get('/:id', getRegistrationById);
 router.put('/:id', updateRegistration);
 router.delete('/:id', deleteRegistration);
 router.get('/:campaignId/registrations', getRegistrationsByCampaignId);
-router.post('/approve/:campaignId/:userId', approvedUser);
+// router.post('/approve/:campaignId/:userId', approvedUser);
 
 
 

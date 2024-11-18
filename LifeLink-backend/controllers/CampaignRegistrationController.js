@@ -38,6 +38,25 @@ const getAllRegistrations = async (req, res) => {
   }
 };
 
+// Get registrations by campaign ID
+const getRegistrationsByCampaignId = async (req, res) => {
+  const { campaignId } = req.params; // Get campaignId from request parameters
+
+  try {
+    // Find registrations matching the provided campaignId
+    const registrations = await CampaignRegistration.find({ campaignId })
+      .populate('userId', 'fullName email phone'); // Optionally populate user data
+
+    if (!registrations.length) {
+      return res.status(404).json({ message: 'No registrations found for this campaign.' });
+    }
+
+    res.status(200).json(registrations);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 // Get a registration by ID
 const getRegistrationById = async (req, res) => {
   try {
@@ -61,7 +80,7 @@ const updateRegistration = async (req, res) => {
     const updatedRegistration = await CampaignRegistration.findByIdAndUpdate(
       req.params.id,
       req.body,
-      { new: true, runValidators: true }
+      { new: true, runValidators: true } // Return the updated document
     );
 
     if (!updatedRegistration) {
@@ -92,6 +111,7 @@ const deleteRegistration = async (req, res) => {
 module.exports = {
   registerForCampaign,
   getAllRegistrations,
+  getRegistrationsByCampaignId,
   getRegistrationById,
   updateRegistration,
   deleteRegistration,
